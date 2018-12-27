@@ -1,0 +1,60 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container">
+<div style="text-align:left">
+    <h3>
+       {{ title }}
+    </h3>
+    <form #endWorkoutForm="ngForm">
+    <table class="tableSetting">
+        <tr>
+            <td style="width:40%;">
+                <p class="paraHeight">Title:</p>
+            </td>
+            <td>
+                <input type="text" name="title" value="{{workoutTitle}}" disabled class="inputBoxSetting3"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:40%;">
+                <p class="paraHeight">Comment:</p>
+            </td>
+            <td>
+                <textarea rows="5" cols="50" name="comment" [(ngModel)]="data.comment" class="inputBoxSetting3"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:40%;">
+                <p class="paraHeight">End Date:</p>
+            </td>
+            <td>
+                    <input type="text" bsDatepicker  name="endDate" [(ngModel)]="endDate" [bsConfig]="bsConfig" [minDate]="data.startDate| date" required readonly class="inputBoxSetting3"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:40%;">
+                <p class="paraHeight">End Time:</p>
+            </td>
+            <td>
+                    <input type="text" name="endTime" [(ngModel)]="endTime" atp-time-picker required readonly class="inputBoxSetting3"/>
+
+            </td>
+        </tr>
+    </table>
+</form>
+    <table style="width:70%;">
+        <tr>
+            <td style="text-align:center;padding-top:70px;">
+                <button type="button" [disabled]="!endWorkoutForm.form.valid" (click)="endWorkout(endWorkoutForm,data)" class="btn btn-primary btn-lg black-background white">End</button>
+            </td>
+            <td style="text-align:left;padding-top:70px;">
+                <a [routerLink]="['/viewall']"><button type="submit" class="btn btn-primary btn-lg black-background white">Cancel</button></a>
+            </td>
+        </tr>
+    </table>
+
+    
+</div>
+</div>
+
+
+  

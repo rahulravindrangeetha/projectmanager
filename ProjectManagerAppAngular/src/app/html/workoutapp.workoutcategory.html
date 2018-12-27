@@ -1,0 +1,41 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container">
+<div style="text-align:left">
+    <h3>
+       {{ title }}
+    </h3>
+    <h3><input type="text" placeholder="Search" [(ngModel)]="searchCategory" style="padding-left:5px;width:100%;height:50px;font-size:14pt"></h3>
+    <form #createCategoryForm="ngForm">
+        <table style="width:100%">
+            <tr>
+                <td style="width:85%">
+                    <h3><input type="text" name="categoryName" [(ngModel)]="categoryName" required style="width:100%"></h3>
+                </td>
+                <td style="width:15%;text-align:right;">
+                    <a [routerLink]="['/workoutCategory/create/',categoryName]"><button type="button" style="width:50%" [disabled]="!createCategoryForm.form.valid" class="btn btn-primary btn-sm black-background white newWorkoutBtn">+</button></a>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div *ngFor="let workoutCategory of data | categoryfilter:searchCategory" class="divSetting">
+            <table style="width:100%">
+                <tr>
+                    <td style="width:70%">
+                            <input type="text" name ="categoryName" [(ngModel)]="workoutCategory.categoryName" [disabled]="workoutCategory.buttonDisabled==0" value="{{workoutCategory.categoryName}}" style="margin:5px;width:99%;border: thin solid #000000">
+                    </td>
+                    <td style="width:15%;text-align: right" [hidden]="workoutCategory.buttonDisabled==1">
+                            <button name="Edit" style="width:80px" (click)="workoutCategory.buttonDisabled=1;" class="btn btn-primary btn-sm black-background white newWorkoutBtn">Edit</button>
+                    </td>
+                    <td style="width:15%;text-align: right" [hidden]="workoutCategory.buttonDisabled==0">
+                            <a [routerLink]="['/workoutCategory/edit',workoutCategory.categoryId,workoutCategory.categoryName]" ><button name="Update" style="width:80px" class="btn btn-primary btn-sm black-background white newWorkoutBtn" >Update</button></a>
+                    </td>
+                    <td style="width:15%;text-align: center">
+                            <button name="delete" style="width:80px" (click)='deleteCategory(workoutCategory.categoryId)' class="btn btn-primary btn-sm black-background white newWorkoutBtn">Delete</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+</div>
+</div>
+
+  

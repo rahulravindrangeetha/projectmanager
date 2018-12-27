@@ -1,0 +1,38 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<table style="width:100%">
+    <tr>
+        <td class="paraHeight" >Workout Time of Day:</td>
+        <td class="paraHeight">{{data.workoutMinDay}}</td>
+        <td class="paraHeight">min</td>
+    </tr>
+    <tr>
+        <td class="paraHeight">Workout Time of Week:</td>
+        <td class="paraHeight">{{data.workoutMinWeek}}</td>
+        <td class="paraHeight">min</td>
+    </tr>
+    <tr>
+        <td class="paraHeight">Workout Time of Month:</td>
+        <td class="paraHeight">{{data.workoutMinMonth}}</td>
+        <td class="paraHeight">min</td>
+    </tr>
+</table>
+<div style="width:100%">
+        <canvas id="weekCalorie">
+
+        </canvas>
+
+</div>
+<p class="paraHeight">Week Total Calories Burnt : {{totalCalorieWeek}}</p>
+&nbsp;
+<div style="width:100%">
+    <canvas id="monthCalorie"></canvas>
+</div>
+<p class="paraHeight">Month Total Calories Burnt : {{totalCalorieMonth}}</p>
+&nbsp;
+<div>
+        <canvas id="yearCalorie"></canvas>
+</div>
+<p class="paraHeight">Year Total Calories Burnt : {{totalCalorieYear}}</p>
+
+
+

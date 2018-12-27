@@ -1,0 +1,56 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container">
+<div style="text-align:left">
+    <h3>
+       {{ heading }}
+
+    </h3>
+    <form #newWorkoutForm="ngForm">
+    <table class="tableSetting">
+        <tr>
+            <td style="width:40%;">
+                <p class="paraHeight">Title:</p>
+            </td>
+            <td>
+                <input type="text" name="workoutTitle" [(ngModel)]="workoutTitle" required class="inputBoxSetting3"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:40%">
+                <p class="paraHeight">Note:</p>
+            </td>
+            <td>
+                <textarea rows="5" cols="50" name="note" [(ngModel)]="note" class="inputBoxSetting3"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:40%">
+                <p class="paraHeight">Calories Burnt Per Min:</p>
+            </td>
+            <td>
+                <input type="text" name="calBurnPerMin" [(ngModel)]="calBurnPerMin" required pattern="[0-9]+(\.{0,1}[0-9]{0,2})" class="inputBoxSetting">
+                <button type="button" class="newWorkoutBtn" (click)="calBurnPerMin=increaseCalorie(calBurnPerMin)" class="btn btn-primary btn-xs black-background white newWorkoutBtn" style="width:20%">+</button> 
+                <button type="button" class="newWorkoutBtn" (click)="calBurnPerMin=decreaseCalorie(calBurnPerMin)" class="btn btn-primary btn-xs black-background white newWorkoutBtn">-</button>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:40%">
+                <p class="paraHeight">Category:</p>
+            </td>
+            <td>
+                <select name="category" [(ngModel)]="category.value" required class="inputBoxSetting2">
+                    <option *ngFor="let workoutCategory of category" [ngValue]="workoutCategory.categoryId" style="align-self: left">{{workoutCategory.categoryName}}</option>
+                  </select>
+                  <a [routerLink]="['/category']"><button type="button"  class="btn btn-primary btn-xs black-background white newWorkoutBtn" >+</button></a>
+            </td>
+        </tr>
+    </table>
+    <div class="divAlign">
+        <button type="button" class="btn btn-primary btn-lg black-background white" [disabled]="!newWorkoutForm.form.valid" (click)="addNewWorkout(newWorkoutForm)">Add Workout</button>
+    </div>
+    </form>
+</div>
+</div>
+
+
+  

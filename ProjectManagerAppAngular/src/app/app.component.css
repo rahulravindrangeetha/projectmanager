@@ -1,0 +1,32 @@
+.wrapper {
+    text-align: center;
+}
+
+.button {
+    position: absolute;
+    top: 50%;
+}
+
+.black-background {background-color:#000000;}
+
+.white {color:#ffffff;}
+
+.hrefHeight {font-size:14pt;}
+
+.paraHeight {font-size:20px;}
+
+.newWorkoutBtn {width:20%;margin-left:40px;}
+
+.divAlign{width:70%;text-align:center;font-size:50px;}
+
+.tableSetting{width:57%;}
+
+.inputBoxSetting{width:32%;height:20px;font-size:12pt;}
+
+.inputBoxSetting2{width:65%;height:20px;font-size:12pt;}
+
+.inputBoxSetting3{font-size:12pt;width:100%;}
+
+.divSetting{border: thin solid #000000;margin-bottom: 10px;}
+
+.newWorkoutBtn2 {width:60%;margin-left:40px;}
