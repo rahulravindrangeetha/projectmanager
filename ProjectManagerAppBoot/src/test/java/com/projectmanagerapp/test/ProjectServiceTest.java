@@ -162,8 +162,10 @@ public class ProjectServiceTest
 	@Test
 	public void suspendProject_suspendProjectTest()
 	{	
-		userService.deleteUser(userOne);
-		verify(userRepo).save(Mockito.any(Users.class));
+		BDDMockito.given(projectRepo.findOne(Mockito.anyInt()))
+		.willReturn(projectOne);
+		projectService.suspendProject(1);
+		verify(projectRepo).suspendProject((Mockito.any(Integer.class)));
 	}
 	
 	/*@Test

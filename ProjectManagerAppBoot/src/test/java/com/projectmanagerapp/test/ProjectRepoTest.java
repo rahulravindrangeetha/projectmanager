@@ -105,6 +105,31 @@ public class ProjectRepoTest
 		
 	}
 	
+	@Test
+	public void suspendProject_suspendAllTasks()
+	{
+		Users savedUserOne = entityManager.persistAndFlush(userOne);
+		Project savedProjectOne = entityManager.persistAndFlush(projectOne);
+		
+		Task savedTaskOne = entityManager.persistAndFlush(taskOne);
+		Task savedTaskTwo = entityManager.persistAndFlush(taskTwo);
+
+		Project project= projectRepo.findOne(savedProjectOne.getProjectId());
+
+		assert(savedProjectOne.getTasks().size()==2);
+		assert(!project.getTasks().get(0).getStatus().equalsIgnoreCase("Suspended"));
+		assert(!project.getTasks().get(1).getStatus().equalsIgnoreCase("Suspended"));
+		projectRepo.suspendProject(savedProjectOne.getProjectId());
+		
+		project=projectRepo.findOne(savedProjectOne.getProjectId());
+		System.out.println(project.getTasks().get(0).getStatus());
+		System.out.println(project.getTasks().get(1).getStatus());
+		assert(project.getTasks().get(0).getStatus().equalsIgnoreCase("Suspended"));
+		assert(project.getTasks().get(1).getStatus().equalsIgnoreCase("Suspended"));
+		
+		
+	}
+	
 	
 	
 
