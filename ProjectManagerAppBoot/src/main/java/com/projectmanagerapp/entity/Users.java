@@ -22,6 +22,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.projectmanagerapp.util.LocalDateDeserializer;
 
@@ -47,9 +48,11 @@ public class Users implements Serializable
 	private int isDeleted;
 		
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="taskManager")
+	@JsonIgnore
 	private List<Task> task;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="projectManager")
+	@JsonIgnore
 	private List<Project> project;
 
 	public int getUserId()

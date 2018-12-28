@@ -121,11 +121,9 @@ public class ProjectRepoTest
 		assert(!project.getTasks().get(1).getStatus().equalsIgnoreCase("Suspended"));
 		projectRepo.suspendProject(savedProjectOne.getProjectId());
 		
-		project=projectRepo.findOne(savedProjectOne.getProjectId());
-		System.out.println(project.getTasks().get(0).getStatus());
-		System.out.println(project.getTasks().get(1).getStatus());
-		assert(project.getTasks().get(0).getStatus().equalsIgnoreCase("Suspended"));
-		assert(project.getTasks().get(1).getStatus().equalsIgnoreCase("Suspended"));
+		Project project2=projectRepo.findOne(savedProjectOne.getProjectId());
+		assert(project2.getTasks().get(0).getStatus().equalsIgnoreCase("Suspended"));
+		assert(project2.getTasks().get(1).getStatus().equalsIgnoreCase("Suspended"));
 		
 		
 	}

@@ -217,22 +217,13 @@ public class ProjectControllerTest
                 .andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
-	/*@Test
-	public void createUser_userCreatedTest()
-	{
-		try 
-		{		
-			mockMvc.perform(MockMvcRequestBuilders.post("/users")
+	@Test
+	public void createProject_projectCreatedTest() throws Exception
+	{		
+			mockMvc.perform(MockMvcRequestBuilders.post("/projects")
 	                .contentType(MediaType.APPLICATION_JSON)
-	                .content(objectMapper.writeValueAsString(userOne)))
+	                .content(objectMapper.writeValueAsString(projectOne)))
 	                .andExpect(MockMvcResultMatchers.status().isCreated());			
-				
-		} 
-		catch (Exception e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}*/
+	}
 
 }

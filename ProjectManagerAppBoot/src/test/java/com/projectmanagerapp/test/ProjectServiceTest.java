@@ -168,14 +168,13 @@ public class ProjectServiceTest
 		verify(projectRepo).suspendProject((Mockito.any(Integer.class)));
 	}
 	
-	/*@Test
-	public void createUser_createAUserTest()
+	@Test
+	public void createProject_createAProjectTest()
 	{
-		userService.createUser(userOne);	
-		verify(userRepo).save(Mockito.any(Users.class));		
+		projectService.createProject(projectOne);	
+		verify(projectRepo).save(Mockito.any(Project.class));		
 	}
-	
-	*/
+
 	
 
 }
