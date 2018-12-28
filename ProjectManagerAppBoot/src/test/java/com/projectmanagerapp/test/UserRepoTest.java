@@ -81,11 +81,7 @@ public class UserRepoTest
 		Users updatedUser= userRepo.findOne(savedUserOne.getUserId());
 		assertEquals(updatedUser.getEmployeeId(),111);	
 		assertEquals(updatedUser.getFirstName(),userOne.getFirstName());
-		assertEquals(updatedUser.getLastName(),userOne.getLastName());
-		
-		
-		
-		
+		assertEquals(updatedUser.getLastName(),userOne.getLastName());		
 	}
 	
 	@Test

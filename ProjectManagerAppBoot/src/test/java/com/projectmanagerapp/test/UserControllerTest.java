@@ -20,14 +20,14 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.projectmanagerapp.controller.ProjectManagerControl;
+import com.projectmanagerapp.controller.UserController;
 import com.projectmanagerapp.entity.Users;
 import com.projectmanagerapp.service.UserService;
 import com.projectmanagerapp.util.UserNotFoundException;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(ProjectManagerControl.class)
-public class ControllerTest 
+@WebMvcTest(UserController.class)
+public class UserControllerTest 
 {
 	@Autowired
 	private MockMvc mockMvc;
@@ -54,11 +54,9 @@ public class ControllerTest
 	}
 	
 	@Test
-	public void getUser_shouldGetAllUserInfo()
+	public void getUser_shouldGetAllUserInfo() throws Exception
 	{
-		try 
-		{
-			
+
 			BDDMockito.given(userService.getAllUserDetail())
 			.willReturn(users);
 			
@@ -73,20 +71,11 @@ public class ControllerTest
 				.andExpect(MockMvcResultMatchers.jsonPath("$.[1].employeeId",is(34)))
 				;
 				
-		} 
-		catch (Exception e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	@Test
-	public void getUser_shouldGetAParticularUserInfo()
+	public void getUser_shouldGetAParticularUserInfo() throws Exception
 	{
-		try 
-		{
-			
 			BDDMockito.given(userService.getAUserDetail(Mockito.anyInt()))
 			.willReturn(userOne);
 			
@@ -95,20 +84,12 @@ public class ControllerTest
 				.andExpect(MockMvcResultMatchers.jsonPath("firstName",is("rahul")))
 				.andExpect(MockMvcResultMatchers.jsonPath("lastName",is("rg")))
 				.andExpect(MockMvcResultMatchers.jsonPath("employeeId",is(23)));
-				
-		} 
-		catch (Exception e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	@Test
-	public void getUser_thowUserException()
+	public void getUser_thowUserException() throws Exception
 	{
-		try 
-		{
+
 			
 			BDDMockito.given(userService.getAUserDetail(Mockito.anyInt()))
 			.willThrow(new UserNotFoundException());
@@ -116,19 +97,11 @@ public class ControllerTest
 			mockMvc.perform(MockMvcRequestBuilders.get("/users/1"))
 				.andExpect(MockMvcResultMatchers.status().isNotFound());
 				
-		} 
-		catch (Exception e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	@Test
-	public void updateUser_updateAUserInfo()
+	public void updateUser_updateAUserInfo() throws Exception
 	{
-		try 
-		{
 			BDDMockito.given(userService.getAUserDetail(Mockito.anyInt()))
 			.willReturn(userOne);
 			
@@ -143,19 +116,32 @@ public class ControllerTest
 			
 			userOne.setEmployeeId(22);
 			
-			mockMvc.perform(MockMvcRequestBuilders.put("/users/")
+			mockMvc.perform(MockMvcRequestBuilders.put("/users")
 	                .contentType(MediaType.APPLICATION_JSON)
 	                .content(objectMapper.writeValueAsString(userOne)))
 	                .andExpect(MockMvcResultMatchers.status().isOk());
-			
-			
 				
-		} 
-		catch (Exception e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	}
+	
+	@Test
+	public void deleteUser_deleteAUser() throws Exception
+	{
+	
+			mockMvc.perform(MockMvcRequestBuilders.delete("/users")
+	                .contentType(MediaType.APPLICATION_JSON)
+	                .content(objectMapper.writeValueAsString(userOne)))
+	                .andExpect(MockMvcResultMatchers.status().isOk());
+		
+	}
+	
+	@Test
+	public void createUser_userCreatedTest() throws Exception
+	{
+		mockMvc.perform(MockMvcRequestBuilders.post("/users")
+	                .contentType(MediaType.APPLICATION_JSON)
+	                .content(objectMapper.writeValueAsString(userOne)))
+	                .andExpect(MockMvcResultMatchers.status().isCreated());						
+		
 	}
 
 }

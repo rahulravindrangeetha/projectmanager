@@ -22,6 +22,7 @@ import com.projectmanagerapp.serviceimpl.UserServiceImpl;
 import com.projectmanagerapp.util.UserNotFoundException;
 
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.junit.Assert.assertEquals;
 
@@ -81,9 +82,11 @@ public class UserServiceTest
 	@Test
 	public void updateUser_updateAUserTest()
 	{
+		
+		BDDMockito.given(userRepo.findOne(Mockito.anyInt()))
+		.willReturn(userOne);
+		
 		userOne.setEmployeeId(111);
-		BDDMockito.given(userRepo.save(Mockito.any(Users.class)))
-		.willReturn(null);
 		
 		userService.updateUser(userOne);
 		
@@ -101,10 +104,37 @@ public class UserServiceTest
 	}
 	
 	@Test(expected = UserNotFoundException.class)
+	public void updateUser_updateAUserNegativeTest()
+	{
+		
+		BDDMockito.given(userRepo.findOne(Mockito.anyInt()))
+		.willReturn(null);
+		
+		userOne.setEmployeeId(111);
+		
+		userService.updateUser(userOne);	
+		
+	}
+	
+	@Test
+	public void createUser_createAUserTest()
+	{
+		userService.createUser(userOne);	
+		verify(userRepo).save(Mockito.any(Users.class));		
+	}
+	
+	@Test
+	public void deleteUser_deleteAUserTest()
+	{	
+		userService.deleteUser(userOne);
+		verify(userRepo).save(Mockito.any(Users.class));
+	}
+	
+	@Test(expected = UserNotFoundException.class)
 	public void getUsers_getAUserNegativeTest()
 	{
 		BDDMockito.given(userRepo.findOne(Mockito.anyInt()))
-		.willThrow(new UserNotFoundException());
+		.willReturn(null);
 
 		Users user = userService.getAUserDetail(1);
 		

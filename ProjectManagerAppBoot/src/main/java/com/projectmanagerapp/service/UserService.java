@@ -11,5 +11,9 @@ public interface UserService
 	public Users getAUserDetail(int userId);
 	
 	public void updateUser(Users updatedUser);
+	
+	public void createUser(Users newUser);
+
+	public void deleteUser(Users userToBeDeleted);
 
 }

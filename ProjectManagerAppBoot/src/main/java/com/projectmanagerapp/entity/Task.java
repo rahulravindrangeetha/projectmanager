@@ -30,11 +30,11 @@ public class Task implements Serializable
 	private int taskId;
 	
 	@ManyToOne
-	@JoinColumn(referencedColumnName="PARENT_ID")
+	@JoinColumn(name="PARENT_ID")
 	private ParentTask parentTask;
 	
 	@ManyToOne
-	@JoinColumn(referencedColumnName="PROJECT_ID")
+	@JoinColumn(name="PROJECT_ID")
 	private Project project;
 	
 	@Column(name="TASK")
@@ -57,12 +57,29 @@ public class Task implements Serializable
 	private String status;
 	
 	@ManyToOne
-	@JoinColumn(referencedColumnName="USER_ID")
+	@JoinColumn(name="USER_ID")
 	private Users taskManager;
 	
 	@Transient
 	private boolean isDisabled;
 	
+	
+	
+	public Task(String task, LocalDate startDate, LocalDate endDate, int priority, String status) 
+	{
+		super();
+		this.task = task;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.priority = priority;
+		this.status = status;
+	}
+	
+	public Task()
+	{
+		
+	}
+
 	public int getTaskId()
 	{
 		return taskId;

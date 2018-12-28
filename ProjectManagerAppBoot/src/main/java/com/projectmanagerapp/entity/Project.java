@@ -1,5 +1,6 @@
 package com.projectmanagerapp.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -13,14 +14,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.projectmanagerapp.util.LocalDateDeserializer;
 
 @Entity
 @Table
-public class Project 
+public class Project implements Serializable
 {
 	@Id
 	@Column(name="PROJECT_ID")
@@ -36,21 +37,25 @@ public class Project
 	@Column(name="START_DATE")
 	@JsonDeserialize(using=LocalDateDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-	//@Convert(converter=DateConvertor.class)
 	private LocalDate startDate;
 	
 	@Column(name="END_DATE")
 	@JsonDeserialize(using=LocalDateDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-	//@Convert(converter=DateConvertor.class)
 	private LocalDate endDate;
 	
 	@Column(name="PRIORITY")
 	private int priority;
 	
 	@ManyToOne
-	@JoinColumn(referencedColumnName="USER_ID")
+	@JoinColumn(name="USER_ID")
 	private Users projectManager;
+	
+	@Transient
+	private int noOfTasks;
+	
+	@Transient
+	private int completed;
 	
 	public Users getProjectManager() 
 	{
@@ -122,13 +127,41 @@ public class Project
 	{
 		this.priority = priority;
 	}
+	
+	
 
-	@Override
-	public String toString() 
+	public int getNoOfTasks()
 	{
-		return "Project [projectId=" + projectId + ", tasks=" + tasks + ", project=" + project + ", startDate="
-				+ startDate + ", endDate=" + endDate + ", priority=" + priority + ", projectManager=" + projectManager
-				+ "]";
+		return noOfTasks;
+	}
+
+	public void setNoOfTasks(int noOfTasks) 
+	{
+		this.noOfTasks = noOfTasks;
+	}
+
+	public int getCompleted() 
+	{
+		return completed;
+	}
+
+	public void setCompleted(int completed) 
+	{
+		this.completed = completed;
+	}
+
+	public Project(String project, LocalDate startDate, LocalDate endDate, int priority, Users projectManager) {
+		super();
+		this.project = project;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.priority = priority;
+		this.projectManager = projectManager;
+	}
+
+	public Project()
+	{
+		
 	}
 
 	

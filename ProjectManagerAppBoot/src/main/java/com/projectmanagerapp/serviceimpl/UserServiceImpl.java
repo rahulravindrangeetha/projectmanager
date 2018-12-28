@@ -47,4 +47,27 @@ public class UserServiceImpl implements UserService
 		
 	}
 
+	@Override
+	public void createUser(Users newUser) 
+	{
+		userRepo.save(newUser);		
+	}
+
+	@Override
+	public void deleteUser(Users userToBeDeleted) throws UserNotFoundException
+	{
+		// TODO Auto-generated method stub
+		Users user = userRepo.findOne(userToBeDeleted.getUserId());
+		if(user==null)
+		{
+			throw new UserNotFoundException();
+		}
+		else
+		{
+			userToBeDeleted.setIsDeleted(1);
+			userRepo.save(userToBeDeleted);			
+		}
+		
+	}
+
 }

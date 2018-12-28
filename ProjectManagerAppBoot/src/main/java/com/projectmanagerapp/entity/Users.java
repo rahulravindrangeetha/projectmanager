@@ -136,17 +136,5 @@ public class Users implements Serializable
 		
 	}
 
-	@Override
-	public String toString() 
-	{
-		return "Users [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", employeeId="
-				+ employeeId + ", isDeleted=" + isDeleted + ", task=" + task + ", project=" + project + "]";
-	}
 	
-	
-
-	
-	
-	
-
 }
