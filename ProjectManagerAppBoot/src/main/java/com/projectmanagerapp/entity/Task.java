@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.projectmanagerapp.util.LocalDateDeserializer;
 
@@ -34,6 +35,7 @@ public class Task implements Serializable
 	private ParentTask parentTask;
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="PROJECT_ID")
 	private Project project;
 	

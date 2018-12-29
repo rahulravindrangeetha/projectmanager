@@ -33,6 +33,7 @@ public class ParentTask implements Serializable
 	private int id;
 	
 	@OneToMany(mappedBy="parentTask")
+	@JsonIgnore
 	private List<Task> tasks;
 	
 	@Column(name="PARENT_TASK")
@@ -73,6 +74,19 @@ public class ParentTask implements Serializable
 	{
 		this.parentTaskDesc = parentTaskDesc;
 	}
+
+	public ParentTask(String parentTaskDesc) 
+	{
+		super();
+		this.parentTaskDesc = parentTaskDesc;
+	}
+	
+	public ParentTask()
+	{
+		
+	}
+	
+	
 	
 		
 	

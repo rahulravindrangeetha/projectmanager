@@ -12,7 +12,7 @@
 		<version>1.5.18.RELEASE</version>
 	</parent>
 	<properties>
-		<start-class>com.workoutapp.util.WorkoutAppBootApplication</start-class>
+		<start-class>com.projectmanagerapp.ProjectManagerAppBootApplication</start-class>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<hibernate.version>5.2.10.Final</hibernate.version>
 	</properties>

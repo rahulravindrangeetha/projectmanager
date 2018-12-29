@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class Project implements Serializable
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private int projectId;
 	
-	@OneToMany(mappedBy="project")
+	@OneToMany(mappedBy="project",fetch=FetchType.LAZY)
 	private List<Task> tasks;
 	
 	@Column(name="PROJECT")

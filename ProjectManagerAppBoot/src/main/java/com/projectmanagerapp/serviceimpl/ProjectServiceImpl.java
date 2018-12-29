@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.projectmanagerapp.entity.Project;
@@ -20,6 +23,7 @@ public class ProjectServiceImpl implements ProjectService
 	private ProjectRepo projectRepo;
 
 	@Override
+	@Cacheable("projects")
 	public List<Project> getAllProjects() 
 	{
 		List<Project> projects=projectRepo.findAll();
@@ -36,6 +40,7 @@ public class ProjectServiceImpl implements ProjectService
 		return projects;
 	}
 
+	@Cacheable("projects")
 	@Override
 	public Project getAProject(int projectId) throws ProjectNotFoundException
 	{
@@ -50,12 +55,15 @@ public class ProjectServiceImpl implements ProjectService
 		}
 	}
 
+	
 	@Override
+	@CacheEvict(value="projects",allEntries=true)
 	public void updateProject(Project updatedProject) 
 	{
 		projectRepo.save(updatedProject);
 	}
 
+	@CachePut("projects")
 	@Override
 	public void createProject(Project newProject) 
 	{
@@ -64,6 +72,7 @@ public class ProjectServiceImpl implements ProjectService
 	}
 
 	@Override
+	@CacheEvict(value="projects",allEntries=true)
 	public void suspendProject(int projectId) throws ProjectNotFoundException
 	{
 		Project project=projectRepo.findOne(projectId);
