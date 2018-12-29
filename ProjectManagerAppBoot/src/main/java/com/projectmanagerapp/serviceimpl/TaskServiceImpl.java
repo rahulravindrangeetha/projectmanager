@@ -1,6 +1,8 @@
 package com.projectmanagerapp.serviceimpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.projectmanagerapp.entity.Task;
@@ -15,6 +17,7 @@ public class TaskServiceImpl implements TaskService
 	TaskRepo taskRepo;
 
 	@Override
+	@Cacheable("tasks")
 	public Task getATask(int taskId) throws TaskNotFoundException
 	{
 		Task task = taskRepo.findOne(taskId);
@@ -30,6 +33,7 @@ public class TaskServiceImpl implements TaskService
 	}
 
 	@Override
+	@CacheEvict(value = { "tasks", "projects" }, allEntries = true)
 	public void updateTask(Task updatedTask) throws TaskNotFoundException
 	{
 		Task task = taskRepo.findOne(updatedTask.getTaskId());
@@ -46,6 +50,7 @@ public class TaskServiceImpl implements TaskService
 	}
 
 	@Override
+	@CacheEvict(value = { "tasks", "projects" }, allEntries = true)
 	public void createTask(Task newTask)
 	{
 		taskRepo.save(newTask);

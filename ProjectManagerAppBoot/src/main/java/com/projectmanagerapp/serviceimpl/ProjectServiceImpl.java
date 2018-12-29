@@ -40,8 +40,9 @@ public class ProjectServiceImpl implements ProjectService
 		return projects;
 	}
 
-	@Cacheable("projects")
+
 	@Override
+	@Cacheable("projects")
 	public Project getAProject(int projectId) throws ProjectNotFoundException
 	{
 		Project project=projectRepo.findOne(projectId);
@@ -63,8 +64,8 @@ public class ProjectServiceImpl implements ProjectService
 		projectRepo.save(updatedProject);
 	}
 
-	@CachePut("projects")
 	@Override
+	@CacheEvict(value="projects",allEntries=true)
 	public void createProject(Project newProject) 
 	{
 		projectRepo.save(newProject);
