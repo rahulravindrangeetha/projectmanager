@@ -126,6 +126,8 @@ public class UserServiceTest
 	@Test
 	public void deleteUser_deleteAUserTest()
 	{	
+		BDDMockito.given(userRepo.findOne(Mockito.anyInt()))
+		.willReturn(userOne);
 		userService.deleteUser(userOne);
 		verify(userRepo).save(Mockito.any(Users.class));
 	}

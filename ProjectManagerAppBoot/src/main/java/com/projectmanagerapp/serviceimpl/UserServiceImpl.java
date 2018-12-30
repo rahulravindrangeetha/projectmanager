@@ -43,7 +43,17 @@ public class UserServiceImpl implements UserService
 	@Override
 	public void updateUser(Users updatedUser) 
 	{
-		userRepo.save(updatedUser);
+		Users user = userRepo.findOne(updatedUser.getUserId());
+		
+		if(user==null)
+		{
+			throw new UserNotFoundException();
+		}
+		else
+		{
+			userRepo.save(updatedUser);
+		}
+		
 		
 	}
 
