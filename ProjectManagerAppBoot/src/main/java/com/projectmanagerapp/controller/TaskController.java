@@ -35,14 +35,14 @@ public class TaskController
 	private TaskService taskService;
 	
 	@RequestMapping(value="/{taskId}",method=RequestMethod.GET)
-	public ResponseEntity getATask(@PathVariable("taskId") int taskId) throws ProjectNotFoundException
+	public ResponseEntity getATask(@PathVariable("taskId") int taskId) throws TaskNotFoundException
 	{
 		Task task = taskService.getATask(taskId);
 		return new ResponseEntity(task,HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT)
-	public ResponseEntity updateATask(@RequestBody Task updatedTask) throws ProjectNotFoundException
+	public ResponseEntity updateATask(@RequestBody Task updatedTask) throws TaskNotFoundException
 	{
 		Task task = taskService.getATask(updatedTask.getTaskId());
 		if(task==null)
@@ -52,6 +52,21 @@ public class TaskController
 		else
 		{
 			taskService.updateTask(updatedTask);
+			return new ResponseEntity(HttpStatus.OK);
+		}	
+	}
+	
+	@RequestMapping(value="/endtask/{taskId}",method=RequestMethod.PUT)
+	public ResponseEntity endATask(@PathVariable("taskId") int taskId ) throws TaskNotFoundException
+	{
+		Task task = taskService.getATask(taskId);
+		if(task==null)
+		{
+			throw new TaskNotFoundException();
+		}
+		else
+		{
+			taskService.endTask(task);
 			return new ResponseEntity(HttpStatus.OK);
 		}	
 	}

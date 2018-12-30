@@ -115,6 +115,38 @@ public class TaskControllerTest
 	}
 	
 	@Test
+	public void endTask_endATaskTest() throws Exception
+	{
+
+		BDDMockito.given(taskService.getATask(Mockito.anyInt()))
+		.willReturn(taskOne);
+		
+		
+		mockMvc.perform(MockMvcRequestBuilders.put("/tasks/endtask/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(taskOne)))
+                .andExpect(MockMvcResultMatchers.status().isOk());		
+				
+		
+	}
+	
+	@Test
+	public void endTask_endATaskTestException() throws Exception
+	{
+
+		BDDMockito.given(taskService.getATask(Mockito.anyInt()))
+		.willReturn(null);
+		
+		
+		mockMvc.perform(MockMvcRequestBuilders.put("/tasks/endtask/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(taskOne)))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());		
+				
+		
+	}
+	
+	@Test
 	public void getTask_getATask() throws Exception
 	{
 

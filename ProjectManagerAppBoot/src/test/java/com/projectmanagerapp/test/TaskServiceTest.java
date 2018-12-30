@@ -163,7 +163,18 @@ public class TaskServiceTest
 		taskService.updateTask(taskOne);
 		
 	}
-
 	
-
+	@Test
+	public void endTask_endATask()
+	{
+		
+		BDDMockito.given(taskRepo.findOne(Mockito.anyInt()))
+		.willReturn(taskOne);
+		
+		taskService.endTask(taskOne);
+		
+		assertEquals(taskOne.getStatus(),"Completed");
+		
+		
+	}
 }

@@ -57,4 +57,12 @@ public class TaskServiceImpl implements TaskService
 
 	}
 
+	@Override
+	public void endTask(Task endTask)
+	{
+		endTask.setStatus("Completed");
+		taskRepo.save(endTask);
+		
+	}
+
 }

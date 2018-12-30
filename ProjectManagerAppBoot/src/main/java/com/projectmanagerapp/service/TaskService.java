@@ -14,5 +14,7 @@ public interface TaskService
 	public void updateTask(Task updatedTask);
 	
 	public void createTask(Task newTask);
+	
+	public void endTask(Task endTask);
 
 }
