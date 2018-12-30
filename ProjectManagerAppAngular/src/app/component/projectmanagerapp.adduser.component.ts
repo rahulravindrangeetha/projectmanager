@@ -1,29 +1,30 @@
 import { Component } from '@angular/core';
-import { WorkoutService} from '../service/workoutservice'
+import { UsersService} from '../service/usersservice'
 import { WorkoutfilterPipe } from '../workoutfilter.pipe'; 
 import { NgZone } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
   selector: 'workoutapp-displayworkouts',
-  templateUrl: '../html/workoutapp.displayworkout.component.html',
+  templateUrl: '../html/projectmanagerapp.adduser.component.html',
   styleUrls: ['../app.component.css'],
-  providers: [WorkoutService]
+  providers: [UsersService]
 
 })
-export class WorkoutDisplayComponent 
+export class AddUserComponent 
 {
   data: any;
   
-  constructor(public workoutService : WorkoutService,
+  constructor(public usersService : UsersService,
     private _ngZone: NgZone,private router:Router)
   {
   }
 
-  ngOnInit()
+  addUser(addUserForm:NgForm)
   {
-     this.getAllWorkouts();
+
   }
 
   getAllWorkouts()

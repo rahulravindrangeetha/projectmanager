@@ -1,31 +1,30 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
-import { WorkoutActive } from '../model/workoutactive.model';
-import { WorkoutCollection } from '../model/workoutcollection.model';
+import { Users } from '../model/users.model';
 import { EmptyObservable } from 'rxjs/observable/EmptyObservable';
 
 @Injectable()
-export class WorkoutService
+export class UsersService
 {
     constructor(private http : HttpClient)
     {
 
     }
 
-    getAllWorkouts()
+    getAllUsers()
     {
-        return this.http.get("http://localhost:8181/WorkoutApplication/workout");
+        return this.http.get("http://localhost:8181/ProjectManagerApp/users");
     }
 
-    getAWorkout(workoutId: number)
+    getAUser(userId: number)
     {
-        return this.http.get("http://localhost:8181/WorkoutApplication/workout/"+workoutId);
+        return this.http.get("http://localhost:8181/ProjectManagerApp/users/"+userId);
     }
 
-    deleteWorkout(workoutId: number):Observable<any>
+    deleteUser(userToBeDeleted: Users):Observable<any>
     {
-        return this.http.delete("http://localhost:8181/WorkoutApplication/workout/"+workoutId);
+        return this.http.delete("http://localhost:8181/ProjectManagerApp/users",userToBeDeleted);
     }
 
     updateWorkout(data:WorkoutCollection): Observable<any>

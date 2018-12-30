@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { WorkoutMainComponent } from './component/app.component';
-import { WorkoutHyperLinkComponent } from './component/workoutapp.hyperlink.component';
-import { WorkoutDisplayComponent } from './component/workoutapp.showworkouts.component';
+import { ProjectManagerMainComponent } from './component/app.component';
+import { ProjectManagerHyperLinkComponent } from './component/projectmanagerapp.hyperlink.component';
+import { AddUserComponent } from './component/projectmanagerapp.adduser.component';
 import { WorkoutEditComponent } from './component/workoutapp.editworkout.component';
 import { WorkoutDeleteComponent } from './component/workoutapp.deleteworkout.component';
 import { WorkoutStartComponent } from './component/workoutapp.startworkout.component';
@@ -15,10 +15,10 @@ import { WorkoutCategoryCreateComponent } from './component/workoutapp.addcatego
 import {WorkoutReportComponent} from './component/workoutapp.showreport.component';
 
 const routes: Routes = [
-  {path:'viewall',component:WorkoutDisplayComponent},
+  {path:'adduser',component:AddUserComponent},
   {path:'create',component:WorkoutAddComponent},
   {path:'category',component:WorkoutCategoryShowComponent},
-  {path:'',component:WorkoutDisplayComponent},
+  {path:'',component:AddUserComponent},
   {path:'track',component:WorkoutReportComponent},
   {path:'workout/edit/:workoutId',component:WorkoutEditComponent},
   {path:'workout/delete/:workoutId',component:WorkoutDeleteComponent},

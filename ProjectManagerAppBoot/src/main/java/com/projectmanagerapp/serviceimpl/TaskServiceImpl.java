@@ -58,6 +58,7 @@ public class TaskServiceImpl implements TaskService
 	}
 
 	@Override
+	@CacheEvict(value = { "tasks", "projects" }, allEntries = true)
 	public void endTask(Task endTask)
 	{
 		endTask.setStatus("Completed");

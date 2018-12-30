@@ -1,5 +1,44 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
+    <form #addUserForm="ngForm">
+    <div style="text-align:left">
+        <table>
+            <tr>
+                <td>
+                        First Name:
+                </td>
+                <td>
+                        <input type="text" [(ngModel)]="firstName" name="firstName" class="inputBoxSetting3" />
+                </td>
+            </tr>
+            <tr>
+                    <td>
+                            Last Name:
+                    </td>
+                    <td>
+                            <input type="text" [(ngModel)]="lastName" name="lastName" class="inputBoxSetting3" />
+                    </td>
+                </tr>
+                <tr>
+                        <td>
+                                Employee Id:
+                        </td>
+                        <td>
+                                <input type="text" [(ngModel)]="employeeId" name="employeeId" class="inputBoxSetting3" />
+                        </td>
+                    </tr>
+        </table>
+        <table>
+            <tr>
+                    <td style="text-align:center;padding-top:70px;"><button type="button" (click)="addUser(addUserForm)" class="btn btn-primary btn-lg black-background white" [disabled]="!newWorkoutForm.form.valid">Add</button></td>
+                    <td style="text-align:left;padding-top:70px;"><button type="button" (click)="resetFom(addUserForm)" class="btn btn-primary btn-lg black-background white">Reset</button></td>
+        
+            </tr>
+        </table>
+
+
+    </div>
+    </form>
     <div style="text-align:left">
         <h3><input type="text" placeholder="Search" [(ngModel)]="workoutSearch" style="padding-left:5px;width:100%;height:50px;font-size:14pt"/></h3>
         &nbsp;&nbsp;

@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { WorkoutMainComponent } from './component/app.component';
-import { WorkoutHyperLinkComponent } from './component/workoutapp.hyperlink.component';
+import { ProjectManagerMainComponent } from './component/app.component';
+import { ProjectManagerHyperLinkComponent } from './component/projectmanagerapp.hyperlink.component';
 import { WorkoutDisplayComponent } from './component/workoutapp.showworkouts.component';
 import { WorkoutEditComponent } from './component/workoutapp.editworkout.component';
 import { WorkoutStartComponent } from './component/workoutapp.startworkout.component';
@@ -21,14 +21,13 @@ import { BsDatepickerModule} from '../../node_modules/ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap';
 import { WorkoutfilterPipe } from './workoutfilter.pipe';
 import { CategoryfilterPipe } from './categoryfilter.pipe';
-import { AmazingTimePickerModule} from 'amazing-time-picker';
 import { DatePipe } from '@angular/common';
 
 
 @NgModule({
   declarations: [
-    WorkoutMainComponent,
-    WorkoutHyperLinkComponent,
+    ProjectManagerMainComponent,
+    ProjectManagerHyperLinkComponent,
     WorkoutDisplayComponent,
     WorkoutEditComponent,
     WorkoutDeleteComponent,
@@ -49,10 +48,9 @@ import { DatePipe } from '@angular/common';
     HttpClientModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
-    FormsModule,
-    AmazingTimePickerModule
+    FormsModule
   ],
   providers: [DatePipe],
-  bootstrap: [WorkoutMainComponent]
+  bootstrap: [ProjectManagerMainComponent]
 })
 export class AppModule { }
