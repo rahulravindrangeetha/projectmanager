@@ -8,7 +8,7 @@
                         First Name:
                 </td>
                 <td>
-                        <input type="text" [(ngModel)]="firstName" name="firstName" class="inputBoxSetting3" />
+                        <input type="text" [(ngModel)]="firstName" name="firstName" class="inputBoxSetting3" required/>
                 </td>
             </tr>
             <tr>
@@ -16,7 +16,7 @@
                             Last Name:
                     </td>
                     <td>
-                            <input type="text" [(ngModel)]="lastName" name="lastName" class="inputBoxSetting3" />
+                            <input type="text" [(ngModel)]="lastName" name="lastName" class="inputBoxSetting3" required/>
                     </td>
                 </tr>
                 <tr>
@@ -24,14 +24,15 @@
                                 Employee Id:
                         </td>
                         <td>
-                                <input type="text" [(ngModel)]="employeeId" name="employeeId" class="inputBoxSetting3" />
+                                <input type="text" pattern="[1-9][0-9]*" [(ngModel)]="employeeId" name="employeeId" class="inputBoxSetting3" required/>
                         </td>
                     </tr>
         </table>
         <table>
             <tr>
-                    <td style="text-align:center;padding-top:70px;"><button type="button" (click)="addUser(addUserForm)" class="btn btn-primary btn-lg black-background white" [disabled]="!newWorkoutForm.form.valid">Add</button></td>
-                    <td style="text-align:left;padding-top:70px;"><button type="button" (click)="resetForm(addUserForm)" class="btn btn-primary btn-lg black-background white">Reset</button></td>
+                    <td [hidden]="visible" style="text-align:center;padding-top:70px;"><button type="button" (click)="addUser()" class="btn btn-primary btn-lg black-background white" [disabled]="!addUserForm.form.valid">Add</button></td>
+                    <td [hidden]="!visible" style="text-align:center;padding-top:70px;"><button type="button" (click)="updateUser()" class="btn btn-primary btn-lg black-background white" [disabled]="!addUserForm.form.valid">Update</button></td>
+                    <td style="text-align:left;padding-top:70px;"><button type="button" (click)="resetForm()" class="btn btn-primary btn-lg black-background white">Reset</button></td>
         
             </tr>
         </table>
@@ -52,7 +53,7 @@
                         <input type="text" [(ngModel)]="user.firstName" name="firstName" class="inputBoxSetting3" disabled />
                     </td>
                     <td style="width:20%">
-                            <button name="edit" (click)='editUser(user.userId)' style="width:90%" class="btn btn-primary btn-lg black-background white">Edit</button>
+                            <button name="edit" (click)='editUser(user)' style="width:90%" class="btn btn-primary btn-lg black-background white">Edit</button>
                     </td>
                 </tr>
                 <tr>
