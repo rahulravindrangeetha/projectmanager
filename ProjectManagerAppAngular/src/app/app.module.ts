@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AddUserComponent } from './component/projectmanagerapp.adduser.component';
+import { AddProjectComponent } from './component/projectmanagerapp.addproject.component';
 import { ProjectManagerMainComponent } from './component/app.component';
 import { ProjectManagerHyperLinkComponent } from './component/projectmanagerapp.hyperlink.component';
 import { Pipe, PipeTransform } from '@angular/core';
@@ -10,9 +11,10 @@ import { FormsModule } from '@angular/forms';
 import { BsDatepickerModule} from '../../node_modules/ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap';
 import { UserfilterPipe } from './userfilter.pipe';
-import { CategoryfilterPipe } from './categoryfilter.pipe';
+import { ProjectfilterPipe } from './projectfilter.pipe';
 import { DatePipe } from '@angular/common';
 import { OrderModule } from 'ngx-order-pipe';
+import { Ng5SliderModule } from 'ng5-slider';
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import { OrderModule } from 'ngx-order-pipe';
     ProjectManagerHyperLinkComponent,
     UserfilterPipe,
     AddUserComponent,
-    CategoryfilterPipe
+    ProjectfilterPipe,
+    AddProjectComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { OrderModule } from 'ngx-order-pipe';
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     FormsModule,
-    OrderModule
+    OrderModule,
+    Ng5SliderModule
   ],
   providers: [DatePipe],
   bootstrap: [ProjectManagerMainComponent]

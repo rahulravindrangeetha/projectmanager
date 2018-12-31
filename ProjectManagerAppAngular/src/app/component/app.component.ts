@@ -6,6 +6,8 @@ import { ProjectManagerHyperLinkComponent } from './projectmanagerapp.hyperlink.
   templateUrl: '../html/app.component.html',
   styleUrls: ['../app.component.css']
 })
-export class ProjectManagerMainComponent {
+export class ProjectManagerMainComponent 
+{
   title = 'Project Manager';
+  
 }
