@@ -14,6 +14,6 @@ public interface UserService
 	
 	public void createUser(Users newUser);
 
-	public void deleteUser(Users userToBeDeleted);
+	public void deleteUser(int userId);
 
 }

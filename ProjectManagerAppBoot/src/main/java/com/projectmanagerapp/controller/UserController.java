@@ -57,10 +57,10 @@ public class UserController
 		return new ResponseEntity(HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(method=RequestMethod.DELETE)
-	public ResponseEntity deleteUser(@RequestBody Users userToBeDeleted) throws UserNotFoundException
+	@RequestMapping(value="/{userId}",method=RequestMethod.DELETE)
+	public ResponseEntity deleteUser(@PathVariable("userId") int userId) throws UserNotFoundException
 	{
-		userService.deleteUser(userToBeDeleted);
+		userService.deleteUser(userId);
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	

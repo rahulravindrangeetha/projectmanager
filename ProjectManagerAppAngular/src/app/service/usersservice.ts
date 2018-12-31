@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { Users } from '../model/users.model';
 import { EmptyObservable } from 'rxjs/observable/EmptyObservable';
+import { NgForm } from '@angular/forms';
 
 @Injectable()
 export class UsersService
@@ -22,39 +23,20 @@ export class UsersService
         return this.http.get("http://localhost:8181/ProjectManagerApp/users/"+userId);
     }
 
-    deleteUser(userToBeDeleted: Users):Observable<any>
+    deleteUser(userId: number):Observable<any>
     {
-        return this.http.delete("http://localhost:8181/ProjectManagerApp/users",userToBeDeleted);
+        return this.http.delete("http://localhost:8181/ProjectManagerApp/users/"+userId);
     }
 
-    updateWorkout(data:WorkoutCollection): Observable<any>
+    updateUser(updatedUser:Users): Observable<any>
     {
-        console.log("in service update workout")
-        return this.http.put("http://localhost:8181/WorkoutApplication/workout",data);
+        return this.http.put("http://localhost:8181/ProjectManagerApp/users",updatedUser);
     
     }
 
-    startWorkout(data:WorkoutActive ,workoutId:number): Observable<any>
+    createNewUser(newUser:Users) : Observable<any>
     {
-        return  this.http.post("http://localhost:8181/WorkoutApplication/workout/startWorkout/"+workoutId,data);
-
-    }
-
-    getActiveWorkoutDetail(workoutId:number)
-    {
-        return this.http.get("http://localhost:8181/WorkoutApplication/workout/startWorkout/"+workoutId);
-    }
-
-    endWorkout(data:WorkoutActive ,workoutId:number): Observable<any>
-    {
-        return this.http.put("http://localhost:8181/WorkoutApplication/workout/endWorkout/"+workoutId,data);
-
-    }
-
-
-    addNewWorkout(data:WorkoutCollection) : Observable<any>
-    {
-        return this.http.post("http://localhost:8181/WorkoutApplication/workout",data);
+        return this.http.post("http://localhost:8181/ProjectManagerApp/users",newUser);
         
     }
 }
