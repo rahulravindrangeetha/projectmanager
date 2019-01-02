@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { OrderModule } from 'ngx-order-pipe';
 import { Project } from '../model/project.model';
+import { Users } from '../model/users.model';
 import { BsDatepickerConfig } from '../../../node_modules/ngx-bootstrap/datepicker';
 import { Options } from 'ng5-slider';
 import { UsersService} from '../service/usersservice'
@@ -100,11 +101,15 @@ export class AddProjectComponent
 
     addProject()
     {
+
       this.project.project=this.projectDesc;
       this.project.priority=this.priority;
+
+      this.project.projectManager= new Users();
       this.project.projectManager.userId=this.managerUserId;
       if(this.checkBoxVal)
       {
+
       var dateData,month,monthString,day,dayString;
       dateData =this.startDate;
       month=dateData.getMonth()+1;
@@ -149,12 +154,28 @@ export class AddProjectComponent
       }
 
       this.project.endDate=dayString+'-'+monthString+'-'+dateData.getFullYear();
-    }
+
+
+    let startDateComparison = new Date(this.project.startDate);
+    let endDateComparison = new Date(this.project.endDate);
+
+    alert(this.project.endDate);
+
+    if(endDateComparison>=startDateComparison)
+    {
+
     this.projectService.createProject(this.project).subscribe();
-
-
-
     }
+    else
+    {
+      alert('Project End Date should be greater than Start Date');
+    }
+    }
+    else
+    {
+      this.projectService.createProject(this.project).subscribe();
+    }
+
 
 }
-
+}

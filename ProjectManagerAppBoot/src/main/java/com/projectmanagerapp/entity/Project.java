@@ -58,9 +58,22 @@ public class Project implements Serializable
 	@Transient
 	private int completed;
 	
+	@Transient
+	private boolean isProjectSuspended;
+	
 	public Users getProjectManager() 
 	{
 		return projectManager;
+	}
+
+	public boolean isProjectSuspended() 
+	{
+		return isProjectSuspended;
+	}
+
+	public void setProjectSuspended(boolean isProjectSuspended) 
+	{
+		this.isProjectSuspended = isProjectSuspended;
 	}
 
 	public void setProjectManager(Users projectManager) 

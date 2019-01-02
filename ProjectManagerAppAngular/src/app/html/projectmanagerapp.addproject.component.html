@@ -122,10 +122,10 @@
                     <td style="width:20%">
                                 <table style="width:100%">
                                                 <tr>
-                                                        <td><button name="edit" (click)='editUser(user)' style="width:90%" class="btn btn-primary btn-lg black-background white">Update</button></td>
+                                                        <td><button name="edit" (click)='editProject(project)' style="width:90%" class="btn btn-primary btn-lg black-background white">Update</button></td>
                                                 </tr>
                                                 <tr>
-                                                                <td><button name="edit" (click)='editUser(user)' style="width:90%" class="btn btn-primary btn-lg black-background white">Suspend</button></td>
+                                                                <td><button name="edit" (click)='suspendProject(user)' [disabled]="isProjectSuspended" style="width:90%" class="btn btn-primary btn-lg black-background white">Suspend</button></td>
                                                 </tr>
                                             </table>
 

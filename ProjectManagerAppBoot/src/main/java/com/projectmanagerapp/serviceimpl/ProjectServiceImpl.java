@@ -33,8 +33,18 @@ public class ProjectServiceImpl implements ProjectService
 			if(tasks!=null)
 			{
 				List<Task> completedTasks=tasks.stream().filter(t -> t.getStatus().equalsIgnoreCase("Completed")).collect(Collectors.toList());
+				List<Task> suspendedTasks=tasks.stream().filter(t -> t.getStatus().equalsIgnoreCase("Suspended")).collect(Collectors.toList());
+				if(suspendedTasks.size()  > 0)
+				{
+					project.setProjectSuspended(true);
+				}
+				else
+				{
+					project.setProjectSuspended(false);
+				}
 				project.setNoOfTasks(tasks.size());
 				project.setCompleted(completedTasks.size());
+				
 			}
 		}
 		return projects;
