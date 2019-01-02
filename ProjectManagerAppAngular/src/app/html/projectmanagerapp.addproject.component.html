@@ -8,13 +8,13 @@
                         Project:
                 </td>
                 <td>
-                        <input type="text" [(ngModel)]="project" name="project" class="inputBoxSetting3" required/>
+                        <input type="text" [(ngModel)]="projectDesc" name="project" class="inputBoxSetting3" required/>
                 </td>
             </tr>
             <tr>
                     <td>&nbsp;</td>
                     <td>
-                            <input type="checkbox" (change)="toggle()" [(ngModel)]="checkBoxVal" name="checkBoxVal" class="inputBoxSetting3" required/>
+                            <input type="checkbox" (change)="toggle()" (checked)="checkBoxVal" name="checkBoxVal" class="inputBoxSetting3" required/>
                             Set Start Date and End Date <input type="text" bsDatepicker [disabled]="!checkBoxVal" name="startDate" [(ngModel)]="startDate" [bsConfig]="bsConfig" readonly required class="inputBoxSetting3"/>
                             <input type="text" bsDatepicker  name="endDate" [(ngModel)]="endDate" [disabled]="!checkBoxVal" [bsConfig]="bsConfig" readonly required class="inputBoxSetting3"/>
                    </td>
@@ -24,22 +24,26 @@
                             Priority:
                     </td>
                     <td>
-                                <ng5-slider [(ngModel)]="priority" [options]="options"></ng5-slider>
+                                <ng5-slider [(value)]="priority" [(ngModel)]="priority" [options]="options"></ng5-slider>
+                                {{priority}}
+                                
                     </td>
                 </tr>
                 <tr>
                         <td>
-                                Employee Id:
+                                Manager:
                         </td>
                         <td>
-                                <input type="text" pattern="[1-9][0-9]*" [(ngModel)]="employeeId" name="employeeId" class="inputBoxSetting3" required/>
+                                <input type="text" [(ngModel)]="managerName" name="managerName" class="inputBoxSetting3" readonly required style="width:80%"/>
+                                &nbsp;
+                                <button type="button" (click)="addManager()" class="btn btn-primary btn-sm black-background white" data-toggle="modal" data-target="#myModal">Search</button>
                         </td>
                     </tr>
         </table>
         <table>
             <tr>
-                    <td [hidden]="visible" style="text-align:center;padding-top:70px;"><button type="button" (click)="addUser()" class="btn btn-primary btn-lg black-background white" [disabled]="!addUserForm.form.valid">Add</button></td>
-                    <td [hidden]="!visible" style="text-align:center;padding-top:70px;"><button type="button" (click)="updateUser()" class="btn btn-primary btn-lg black-background white" [disabled]="!addUserForm.form.valid">Update</button></td>
+                    <td [hidden]="visible" style="text-align:center;padding-top:70px;"><button type="button" (click)="addProject()" class="btn btn-primary btn-lg black-background white" [disabled]="!addProjectForm.form.valid">Add</button></td>
+                    <td [hidden]="!visible" style="text-align:center;padding-top:70px;"><button type="button" (click)="updateProject()" class="btn btn-primary btn-lg black-background white" [disabled]="!addProjectForm.form.valid">Update</button></td>
                     <td style="text-align:left;padding-top:70px;"><button type="button" (click)="resetForm()" class="btn btn-primary btn-lg black-background white">Reset</button></td>
         
             </tr>
@@ -56,7 +60,7 @@
                 <button name="completed" (click)='setOrder($event)' style="width:90%" class="btn btn-primary btn-lg black-background white" >Completed</button>
         </h3>
         &nbsp;&nbsp;
-        <div *ngFor="let project of data | projectfilter:projectSearch | orderBy:orderByData:reverse:true" class="divSetting">
+        <div *ngFor="let project of data | projectFilter:projectSearch | orderBy:orderByData:reverse:true" class="divSetting">
             <table style="width:100%">
                 <tr>                       
                     <td style="width:60%">
@@ -131,6 +135,48 @@
             &nbsp;
         </div>
     </div>
+    <div class="modal fade" id="myModal" role="document">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Search Manger</h4>
+            </div>
+            <div class="modal-body">
+                <div style="text-align:left">
+                        <h3><input type="text" placeholder="Search" [(ngModel)]="managerSearch" style="padding-left:5px;width:100%;height:50px;font-size:14pt"/>
+                        </h3>
+                        &nbsp;&nbsp;
+                        <table style="width:100%">
+                                <tr>
+                                        <th style="width:34%">First Name</th>
+                                        <th style="width:34%">Last Name</th>
+                                        <th style="width:32%">Employee Id</th>
+                                </tr>                            
+                                <tr *ngFor="let user of users | userFilter:managerSearch" (click)='addManager(user)'  [ngClass]="{'rowClass': user.userId===managerUserId}">
+                                        <td style="width:34%">
+                                                <input type="text" [(ngModel)]="user.firstName" name="firstName" class="inputBoxSetting3" disabled />
+                                        </td>
+                                        <td style="width:34%">
+                                                <input type="text" [(ngModel)]="user.lastName" name="lastName" class="inputBoxSetting3" disabled/>
+                                        </td>
+                                        <td style="width:32%">
+                                                <input type="text" [(ngModel)]="user.employeeId" name="employeeId" class="inputBoxSetting3" disabled />
+                                        </td>
+                                </tr>
+
+                        </table>
+                </div>
+            </div>
+            <div class="modal-footer d-flex">
+              <button type="button" class="btn btn-default" data-dismiss="modal" (click)=assignFn()>Select</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
 </div>
 
 
