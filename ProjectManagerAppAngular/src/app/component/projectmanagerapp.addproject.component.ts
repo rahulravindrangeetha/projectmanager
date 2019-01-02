@@ -32,6 +32,7 @@ export class AddProjectComponent
   checkBoxVal : boolean = false;
   project: Project=new Project();
   managerUserId: number;
+  projectId: number;
   managerName:string;
   managerNameTemp:string;
   priority:number= 0;
@@ -159,7 +160,7 @@ export class AddProjectComponent
     let startDateComparison = new Date(this.project.startDate);
     let endDateComparison = new Date(this.project.endDate);
 
-    alert(this.project.endDate);
+ 
 
     if(endDateComparison>=startDateComparison)
     {
@@ -176,6 +177,27 @@ export class AddProjectComponent
       this.projectService.createProject(this.project).subscribe();
     }
 
+}
 
+editProject(editProject:Project)
+{
+  this.projectDesc=editProject.project;
+  this.projectId=editProject.projectId
+  this.priority=editProject.priority;
+  this.managerUserId=editProject.projectManager.userId;
+  this.managerName=editProject.projectManager.firstName+' '+editProject.projectManager.lastName;
+  this.visible =!this.visible;
+  if(editProject.startDate!= null)
+  {
+  this.startDate = new Date(editProject.startDate);
+  this.endDate = new Date(editProject.endDate);
+  this.checkBoxVal=true;
+  }
+  else
+  {
+    this.startDate=null;
+    this.endDate=null;
+    this.checkBoxVal=false;
+  }
 }
 }
