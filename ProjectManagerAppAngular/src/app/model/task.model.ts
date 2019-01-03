@@ -1,5 +1,6 @@
 import { Users } from "./users.model";
 import { ParentTask } from "./parenttask.model";
+import { Project } from "./project.model";
 export  class Task
 {
     taskId : number;
@@ -9,6 +10,7 @@ export  class Task
     endDate : string;
     priority : number;
     parentTask : ParentTask;
+    project : Project;
     status : string;
     
 

@@ -17,6 +17,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.projectmanagerapp.util.LocalDateDeserializer;
 
@@ -32,6 +33,7 @@ public class Project implements Serializable
 	@OneToMany(mappedBy="project",fetch=FetchType.LAZY)
 	private List<Task> tasks;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="project",fetch=FetchType.LAZY)
 	private List<ParentTask> parentTasks;
 	

@@ -24,7 +24,7 @@ export class ParentTaskService
 
     getAllParentTaskOfProjects(projectId:number)
     {
-        return this.http.get("http://localhost:8181/ProjectManagerApp/parenttasks/projectId"); 
+        return this.http.get("http://localhost:8181/ProjectManagerApp/parenttasks/"+projectId); 
     }
 
 

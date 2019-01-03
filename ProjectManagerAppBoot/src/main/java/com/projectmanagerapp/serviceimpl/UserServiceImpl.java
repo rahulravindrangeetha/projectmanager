@@ -3,6 +3,8 @@ package com.projectmanagerapp.serviceimpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.projectmanagerapp.entity.Users;
@@ -18,6 +20,7 @@ public class UserServiceImpl implements UserService
 	
 
 	@Override
+	@Cacheable("users")
 	public List<Users> getAllUserDetail() 
 	{
 		System.out.println("repo"+userRepo);
@@ -25,6 +28,7 @@ public class UserServiceImpl implements UserService
 	}
 
 	@Override
+	@Cacheable("users")
 	public Users getAUserDetail(int userId) throws UserNotFoundException
 	{
 		Users user = userRepo.findOne(userId);
@@ -41,6 +45,7 @@ public class UserServiceImpl implements UserService
 	}
 
 	@Override
+	@CacheEvict("users")
 	public void updateUser(Users updatedUser) 
 	{
 		Users user = userRepo.findOne(updatedUser.getUserId());
@@ -58,12 +63,14 @@ public class UserServiceImpl implements UserService
 	}
 
 	@Override
+	@CacheEvict("users")
 	public void createUser(Users newUser) 
 	{
 		userRepo.save(newUser);		
 	}
 
 	@Override
+	@CacheEvict("users")
 	public void deleteUser(int userId) throws UserNotFoundException
 	{
 		// TODO Auto-generated method stub

@@ -13,6 +13,7 @@ import { BsDatepickerModule} from '../../node_modules/ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap';
 import { UserfilterPipe } from './userfilter.pipe';
 import { ProjectfilterPipe } from './projectfilter.pipe';
+import { ParentTaskfilterPipe } from './parenttaskfilter.pipe';
 import { DatePipe } from '@angular/common';
 import { OrderModule } from 'ngx-order-pipe';
 import { Ng5SliderModule } from 'ng5-slider';
@@ -26,7 +27,8 @@ import { Ng5SliderModule } from 'ng5-slider';
     AddUserComponent,
     ProjectfilterPipe,
     AddProjectComponent,
-    AddTaskComponent
+    AddTaskComponent,
+    ParentTaskfilterPipe
   ],
   imports: [
     BrowserModule,

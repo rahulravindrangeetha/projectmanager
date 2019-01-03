@@ -39,7 +39,6 @@ public class ParentTask implements Serializable
 	@Column(name="PARENT_TASK")
 	private String parentTaskDesc;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="PROJECT_ID")
 	private Project project;

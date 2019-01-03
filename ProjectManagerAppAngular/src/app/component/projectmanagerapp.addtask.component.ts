@@ -9,6 +9,7 @@ import { OrderModule } from 'ngx-order-pipe';
 import { Project } from '../model/project.model';
 import { Users } from '../model/users.model';
 import { ParentTask } from '../model/parenttask.model';
+import { Task } from '../model/task.model';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker/ngx-bootstrap-datepicker';
 import { Options } from 'ng5-slider';
 import { UsersService} from '../service/usersservice'
@@ -35,6 +36,8 @@ export class AddTaskComponent
   visible : boolean = false;
   checkBoxVal : boolean = false;
   project: Project=new Project();
+  task: Task=new Task();
+  parentTask: ParentTask=new ParentTask();
   taskUserId: number;
   projectId: number;
   taskOwnerName:string;
@@ -110,16 +113,30 @@ export class AddTaskComponent
   toggle()
   {
     this.checkBoxVal=!this.checkBoxVal;
-    if(!this.checkBoxVal)
+    if(this.checkBoxVal)
     {
       this.startDate=null;
       this.endDate=null;
+      this.options={
+        floor: 0,
+        ceil: 30,
+        step: 1,
+        disabled:true,
+        noSwitching: false
+      };
+      this.priority=0;
     }
     else
     {
       this.startDate=new Date();
       this.endDate=new Date();
       this.endDate.setDate(this.endDate.getDate() + 1);
+      this.options={
+        floor: 0,
+        ceil: 30,
+        step: 1,
+        disabled:false,
+        noSwitching: false};
     }
   }
 
@@ -131,6 +148,9 @@ export class AddTaskComponent
       this.projectService.getAllProjects().subscribe(
         resp=>{this.data=resp},error=>{console.log(error,"error")}
       );
+      this.startDate=new Date();
+      this.endDate=new Date();
+      this.endDate.setDate(this.endDate.getDate() + 1);
     }
 
     setOrder(event)
@@ -157,8 +177,13 @@ export class AddTaskComponent
 
       this.project.projectManager= new Users();
       //this.project.projectManager.userId=this.managerUserId;
-      if(this.checkBoxVal)
+      if(!this.checkBoxVal)
       {
+        this.task.task=this.taskDesc
+        this.task.project=new Project();
+        this.task.project.projectId=this.projectId
+        this.task.parentTask=new ParentTask();
+        this.task.parentTask.id=this.parentTaskId;
 
       var dateData,month,monthString,day,dayString;
       dateData =this.startDate;
@@ -181,7 +206,7 @@ export class AddTaskComponent
         dayString=day.toString();
       }
 
-      this.project.startDate=dayString+'-'+monthString+'-'+dateData.getFullYear();
+      this.task.startDate=dayString+'-'+monthString+'-'+dateData.getFullYear();
 
       dateData =this.endDate;
       month=dateData.getMonth()+1;
@@ -203,27 +228,31 @@ export class AddTaskComponent
         dayString=day.toString();
       }
 
-      this.project.endDate=dayString+'-'+monthString+'-'+dateData.getFullYear();
+      this.task.endDate=dayString+'-'+monthString+'-'+dateData.getFullYear();
 
 
-    let startDateComparison = new Date(this.project.startDate);
-    let endDateComparison = new Date(this.project.endDate);
+      let startDateComparison = new Date(this.project.startDate);
+      let endDateComparison = new Date(this.project.endDate);
 
- 
+  
 
-    if(endDateComparison>=startDateComparison)
-    {
+      if(endDateComparison>=startDateComparison)
+      {
 
-    this.projectService.createProject(this.project).subscribe();
+          this.taskService.createTask(this.task).subscribe();
+      }
+      else
+      {
+        alert('Task End Date should be greater than Start Date');
+      }
     }
     else
     {
-      alert('Project End Date should be greater than Start Date');
-    }
-    }
-    else
-    {
-      this.projectService.createProject(this.project).subscribe();
+      this.parentTask.parentTaskDesc=this.taskDesc;
+      this.parentTask.project=new Project();
+      this.parentTask.project.projectId=this.projectId;
+      alert(this.parentTask.project.projectId);
+      this.parentTaskService.createParentTask(this.parentTask).subscribe();
     }
 
 }

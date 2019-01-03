@@ -8,7 +8,7 @@
                         Project:
                 </td>
                 <td>
-                        <input type="text" [(ngModel)]="projectDesc" name="project" class="inputBoxSetting3" readonly required style="width:80%"/>
+                        <input type="text" [(ngModel)]="projectDesc" name="projectDesc" class="inputBoxSetting3" readonly required style="width:80%"/>
                         &nbsp;
                                 <button type="button" (click)="addProject()" class="btn btn-primary btn-sm black-background white" data-toggle="modal" data-target="#myProjectModal">Search</button>
                 </td>
@@ -24,7 +24,7 @@
             <tr>
                     <td>&nbsp;</td>
                     <td>
-                            <input type="checkbox" (change)="toggle()" (checked)="checkBoxVal" name="checkBoxVal" class="inputBoxSetting3" required/> Parent Task
+                            <input type="checkbox" (change)="toggle()" (checked)="checkBoxVal" name="checkBoxVal" class="inputBoxSetting3"/> Parent Task
                             
                    </td>
             </tr>
@@ -32,29 +32,45 @@
                     <td>
                             Parent Task:
                     </td>
-                    <td>
+                    
                         <td>
-                                <input type="text" [(ngModel)]="parentTaskDesc" name="project" class="inputBoxSetting3" readonly required style="width:80%"/>
+                                <input type="text" [disabled]="checkBoxVal" [(ngModel)]="parentTaskDesc" name="parentTaskDesc" class="inputBoxSetting3" readonly style="width:80%" required/>
                                 &nbsp;
-                                        <button type="button" class="btn btn-primary btn-sm black-background white" data-toggle="modal" data-target="#myParentTaskModal">Search</button>
+                                        <button [disabled]="checkBoxVal" type="button" class="btn btn-primary btn-sm black-background white" data-toggle="modal" data-target="#myParentTaskModal" >Search</button>
                         </td>
-                    </td>
+                   
                 </tr>
+                <tr>
+                        <td>
+                                Priority:
+                        </td>
+                        <td>
+                                    <ng5-slider [(value)]="priority"  [(ngModel)]="priority" [options]="options"></ng5-slider>                                   
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                Start Date:<input type="text" bsDatepicker [disabled]="checkBoxVal" name="startDate" [(ngModel)]="startDate" [bsConfig]="bsConfig" readonly required class="inputBoxSetting3"/>
+                        </td>
+                        <td>
+                                End Date:<input type="text" bsDatepicker [disabled]="checkBoxVal" name="endDate" [(ngModel)]="endDate" [bsConfig]="bsConfig" readonly required class="inputBoxSetting3"/>
+                                    
+                        </td>
+                    </tr>
                 <tr>
                         <td>
                                 Manager:
                         </td>
                         <td>
-                                <input type="text" [(ngModel)]="taskOwnerName" name="managerName" class="inputBoxSetting3" readonly required style="width:80%"/>
+                                <input type="text" [disabled]="checkBoxVal" [(ngModel)]="taskOwnerName" name="taskOwnerName" class="inputBoxSetting3" readonly required style="width:80%"/>
                                 &nbsp;
-                                <button type="button" (click)="addManager()" class="btn btn-primary btn-sm black-background white" data-toggle="modal" data-target="#myModal">Search</button>
+                                <button type="button" (click)="addManager()" [disabled]="checkBoxVal"  class="btn btn-primary btn-sm black-background white" data-toggle="modal" data-target="#myModal">Search</button>
                         </td>
                     </tr>
         </table>
         <table>
             <tr>
-                    <td [hidden]="visible" style="text-align:center;padding-top:70px;"><button type="button" (click)="addProject()" class="btn btn-primary btn-lg black-background white" [disabled]="!addProjectForm.form.valid">Add</button></td>
-                    <td [hidden]="!visible" style="text-align:center;padding-top:70px;"><button type="button" (click)="updateProject()" class="btn btn-primary btn-lg black-background white" [disabled]="!addProjectForm.form.valid">Update</button></td>
+                    <td  style="text-align:center;padding-top:70px;"><button type="button" (click)="addTask()" class="btn btn-primary btn-lg black-background white" [disabled]="!addProjectForm.form.valid">Add</button></td>
                     <td style="text-align:left;padding-top:70px;"><button type="button" (click)="resetForm()" class="btn btn-primary btn-lg black-background white">Reset</button></td>
         
             </tr>
@@ -182,7 +198,7 @@
                 </div>
             </div>
             <div class="modal-footer d-flex">
-              <button type="button" class="btn btn-default" data-dismiss="modal" (click)=assignProjectFn()>Select</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal" (click)=assignParentTaskFn()>Select</button>
             </div>
           </div>
           
