@@ -181,12 +181,15 @@ export class AddTaskComponent
       {
         this.task.task=this.taskDesc
         this.task.project=new Project();
-        this.task.project.projectId=this.projectId
+        this.task.project.projectId=this.projectId;
         this.task.parentTask=new ParentTask();
         this.task.parentTask.id=this.parentTaskId;
+        this.task.taskManager=new Users();
+        this.task.taskManager.userId=this.taskUserId;
 
       var dateData,month,monthString,day,dayString;
       dateData =this.startDate;
+    
       month=dateData.getMonth()+1;
       if(month<10)
       {
@@ -207,7 +210,7 @@ export class AddTaskComponent
       }
 
       this.task.startDate=dayString+'-'+monthString+'-'+dateData.getFullYear();
-
+      alert(this.task.startDate);
       dateData =this.endDate;
       month=dateData.getMonth()+1;
       if(month<10)
@@ -231,10 +234,8 @@ export class AddTaskComponent
       this.task.endDate=dayString+'-'+monthString+'-'+dateData.getFullYear();
 
 
-      let startDateComparison = new Date(this.project.startDate);
-      let endDateComparison = new Date(this.project.endDate);
-
-  
+      let startDateComparison = new Date(this.task.startDate);
+      let endDateComparison = new Date(this.task.endDate);
 
       if(endDateComparison>=startDateComparison)
       {

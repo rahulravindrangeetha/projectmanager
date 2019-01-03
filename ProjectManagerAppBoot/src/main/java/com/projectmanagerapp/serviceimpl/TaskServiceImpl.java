@@ -53,6 +53,7 @@ public class TaskServiceImpl implements TaskService
 	@CacheEvict(value = { "tasks", "projects" }, allEntries = true)
 	public void createTask(Task newTask)
 	{
+		newTask.setStatus("InProgress");
 		taskRepo.save(newTask);
 
 	}
