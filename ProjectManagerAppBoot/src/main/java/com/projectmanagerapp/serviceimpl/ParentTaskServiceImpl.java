@@ -12,6 +12,7 @@ import com.projectmanagerapp.entity.Task;
 import com.projectmanagerapp.repo.ParentTaskRepo;
 import com.projectmanagerapp.service.ParentTaskService;
 
+
 @Service
 public class ParentTaskServiceImpl implements ParentTaskService 
 {
@@ -20,12 +21,12 @@ public class ParentTaskServiceImpl implements ParentTaskService
 
 	@Override
 	@Cacheable("parentTask")
-	public List<ParentTask> getAllParentTask() 
+	public List<ParentTask> getAllParentTask(int projectId) 
 	{
 		// TODO Auto-generated method stub
-		return parentTaskRepo.findAll();
+		return parentTaskRepo.getAllParentTasks(projectId);
 	}
-
+	
 	@Override
 	@CacheEvict("parentTask")
 	public void createParentTask(ParentTask parentTask) 

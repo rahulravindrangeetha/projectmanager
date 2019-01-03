@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AddUserComponent } from './component/projectmanagerapp.adduser.component';
+import { AddTaskComponent } from './component/projectmanagerapp.addtask.component';
 import { AddProjectComponent } from './component/projectmanagerapp.addproject.component';
 import { ProjectManagerMainComponent } from './component/app.component';
 import { ProjectManagerHyperLinkComponent } from './component/projectmanagerapp.hyperlink.component';
@@ -24,7 +25,8 @@ import { Ng5SliderModule } from 'ng5-slider';
     UserfilterPipe,
     AddUserComponent,
     ProjectfilterPipe,
-    AddProjectComponent
+    AddProjectComponent,
+    AddTaskComponent
   ],
   imports: [
     BrowserModule,

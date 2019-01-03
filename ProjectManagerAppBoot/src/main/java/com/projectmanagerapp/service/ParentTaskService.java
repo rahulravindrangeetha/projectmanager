@@ -10,8 +10,9 @@ import com.projectmanagerapp.entity.Users;
 public interface ParentTaskService 
 {
 	
-	public List<ParentTask> getAllParentTask();
-	
+
 	public void createParentTask(ParentTask parentTask);
+	
+	public List<ParentTask> getAllParentTask(int projectId);
 
 }

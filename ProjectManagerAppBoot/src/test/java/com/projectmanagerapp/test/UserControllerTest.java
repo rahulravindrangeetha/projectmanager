@@ -127,7 +127,7 @@ public class UserControllerTest
 	public void deleteUser_deleteAUser() throws Exception
 	{
 	
-			mockMvc.perform(MockMvcRequestBuilders.delete("/users")
+			mockMvc.perform(MockMvcRequestBuilders.delete("/users/1")
 	                .contentType(MediaType.APPLICATION_JSON)
 	                .content(objectMapper.writeValueAsString(userOne)))
 	                .andExpect(MockMvcResultMatchers.status().isOk());

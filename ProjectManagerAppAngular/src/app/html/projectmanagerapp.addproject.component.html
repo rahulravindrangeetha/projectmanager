@@ -53,14 +53,14 @@
     </div>
     </form>
     <div style="text-align:left">
-        <h3><input type="text" placeholder="Search" [(ngModel)]="projectSearch" style="padding-left:5px;width:100%;height:50px;font-size:14pt"/>
+        <h3><input type="text" placeholder="Search" [(ngModel)]="searchProject" style="padding-left:5px;width:100%;height:50px;font-size:14pt"/>
                 Sort : <button name="startDate" (click)='setOrder($event)' style="width:90%" class="btn btn-primary btn-lg black-background white" >Start Date</button>
                 <button name="endDate" (click)='setOrder($event)' style="width:90%" class="btn btn-primary btn-lg black-background white" >End Date</button>
                 <button name="priority" (click)='setOrder($event)' style="width:90%" class="btn btn-primary btn-lg black-background white" >Priority</button>
                 <button name="completed" (click)='setOrder($event)' style="width:90%" class="btn btn-primary btn-lg black-background white" >Completed</button>
         </h3>
-        &nbsp;&nbsp;
-        <div *ngFor="let project of data | projectFilter:projectSearch | orderBy:orderByData:reverse:true" class="divSetting">
+
+        <div *ngFor="let project of data | projectFilter:searchProject | orderBy:orderByData:reverse:true" class="divSetting">
             <table style="width:100%">
                 <tr>                       
                     <td style="width:60%">
@@ -70,7 +70,7 @@
                                                 Project:
                                         </td>
                                         <td>
-                                                {{project.project}}
+                                                {{project.project}}{{searchProject}}
                                         </td>
                                         <td>
                                                 &nbsp;
@@ -115,17 +115,17 @@
                                         <td>Priority</td>
                                 </tr>
                                 <tr>
-                                        <td>{{project.priority}}</td>
+                                        <td>{{project.priority}}{{searchProject}}</td>
                                 </tr>
                             </table>
                     </td>
                     <td style="width:20%">
                                 <table style="width:100%">
                                                 <tr>
-                                                        <td><button name="edit" (click)='editProject(project)' [disabled]="isProjectSuspended" style="width:90%" class="btn btn-primary btn-lg black-background white">Update</button></td>
+                                                        <td><button name="edit" (click)='editProject(project)' [disabled]="project.projectSuspended" style="width:90%" class="btn btn-primary btn-lg black-background white">Update</button></td>
                                                 </tr>
                                                 <tr>
-                                                                <td><button name="edit" (click)='suspendProject(project)' [disabled]="project.noOfTasks===0 || project.projectSuspended" style="width:90%" class="btn btn-primary btn-lg black-background white">Suspend</button></td>
+                                                                <td><button name="edit" (click)='suspendProject(project.projectId)' [disabled]="project.noOfTasks===0 || project.projectSuspended" style="width:90%" class="btn btn-primary btn-lg black-background white">Suspend</button></td>
                                                 </tr>
                                             </table>
 
@@ -180,3 +180,4 @@
 </div>
 
 
+{{projectSearch}}

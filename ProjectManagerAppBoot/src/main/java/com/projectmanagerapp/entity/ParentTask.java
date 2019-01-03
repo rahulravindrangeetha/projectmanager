@@ -38,11 +38,36 @@ public class ParentTask implements Serializable
 	
 	@Column(name="PARENT_TASK")
 	private String parentTaskDesc;
+	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="PROJECT_ID")
+	private Project project;
 
 	public int getId() 
 	{
 		return id;
 	}
+	
+	public Project getProject() 
+	{
+		return project;
+	}
+
+
+
+	public void setProject(Project project)
+	{
+		this.project = project;
+	}
+
+
+
+	public void setParentTaskDesc(String parentTaskDesc) {
+		this.parentTaskDesc = parentTaskDesc;
+	}
+
+
 
 	public void setId(int id) 
 	{

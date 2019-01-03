@@ -129,10 +129,10 @@ public class ParentTaskControllerTest
 	public void getParentTask_getAllParentTask() throws Exception
 	{
 
-		BDDMockito.given(parentTaskService.getAllParentTask())
+		BDDMockito.given(parentTaskService.getAllParentTask(1))
 		.willReturn(parentTasks);
 		
-		mockMvc.perform(MockMvcRequestBuilders.get("/parenttasks"))
+		mockMvc.perform(MockMvcRequestBuilders.get("/parenttasks/1"))
 			.andExpect(MockMvcResultMatchers.status().isOk())
 			.andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(2)))
 			.andExpect(MockMvcResultMatchers.jsonPath("$.[0].parentTaskDesc",is("parent task1")))

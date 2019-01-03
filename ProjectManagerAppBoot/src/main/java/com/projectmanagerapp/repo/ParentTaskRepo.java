@@ -17,5 +17,7 @@ import com.projectmanagerapp.entity.Users;
 @Repository("ParentTaskRepo")
 public interface ParentTaskRepo extends JpaRepository<ParentTask, Integer>
 {
+	@Query("from ParentTask pt where pt.project.projectId=?1")
+	List<ParentTask> getAllParentTasks(int projectId);
 
 }

@@ -32,6 +32,9 @@ public class Project implements Serializable
 	@OneToMany(mappedBy="project",fetch=FetchType.LAZY)
 	private List<Task> tasks;
 	
+	@OneToMany(mappedBy="project",fetch=FetchType.LAZY)
+	private List<ParentTask> parentTasks;
+	
 	@Column(name="PROJECT")
 	private String project;
 	
@@ -74,6 +77,16 @@ public class Project implements Serializable
 	public void setProjectSuspended(boolean isProjectSuspended) 
 	{
 		this.isProjectSuspended = isProjectSuspended;
+	}
+	
+	public List<ParentTask> getParentTasks() 
+	{
+		return parentTasks;
+	}
+
+	public void setParentTasks(List<ParentTask> parentTasks) 
+	{
+		this.parentTasks = parentTasks;
 	}
 
 	public void setProjectManager(Users projectManager) 

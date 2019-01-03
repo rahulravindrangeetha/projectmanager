@@ -36,10 +36,10 @@ public class ParentTaskController
 	@Autowired
 	private ParentTaskService parentTaskService;
 	
-	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity getATask()
+	@RequestMapping(value="/projectId",method=RequestMethod.GET)
+	public ResponseEntity getATask(@PathVariable("projectId") int projectId)
 	{
-		List<ParentTask> parentTasks = parentTaskService.getAllParentTask();
+		List<ParentTask> parentTasks = parentTaskService.getAllParentTask(projectId);
 		return new ResponseEntity(parentTasks,HttpStatus.OK);
 	}
 	

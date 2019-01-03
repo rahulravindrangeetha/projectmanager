@@ -126,10 +126,10 @@ private List<ParentTask> parentTasks = new ArrayList<ParentTask>();
 	@Test
 	public void getTask_getATask()
 	{
-		BDDMockito.given(parentTaskRepo.findAll())
+		BDDMockito.given(parentTaskRepo.getAllParentTasks(1))
 		.willReturn(parentTasks);
 
-		List<ParentTask> parentTasks = parentTaskService.getAllParentTask();
+		List<ParentTask> parentTasks = parentTaskService.getAllParentTask(1);
 
 		assertEquals(parentTasks.size(),2);
 	}
