@@ -65,8 +65,32 @@ export class ViewTaskComponent
   assignProjectFn()
   {
     this.projectDesc=this.projectDescTemp;
+    this.taskData=null;
     this.taskService.getTasks(this.projectId).subscribe(
       resp=>{this.taskData=resp},error=>{console.log(error,"error")}
+    );
+  }
+
+  editTask(taskId:number)
+  {
+
+  }
+  endTask(taskId:number)
+  {
+    this.taskService.endTask(taskId).subscribe
+    (
+      resp=>
+      {
+        this.taskData=null;
+        this.taskService.getTasks(this.projectId).subscribe(
+        resp=>{this.taskData=resp},error=>{console.log(error,"error")}
+    );
+      },
+      error=>
+      {
+        console.log(error,"error")
+      }
+
     );
   }
 

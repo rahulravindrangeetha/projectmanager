@@ -76,6 +76,25 @@ public class Task implements Serializable
 		this.status = status;
 	}
 	
+	public Task(int taskId,String task,LocalDate startDate, LocalDate endDate, int priority,ParentTask parentTask)
+	{
+		this.taskId=taskId;
+		this.task = task;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.priority = priority;
+		
+		if(parentTask!=null)
+		{
+			this.parentTask=new ParentTask(parentTask.getParentTaskDesc());
+		}
+		else
+		{
+			this.parentTask=new ParentTask("This task has no parent");
+		}
+	
+	}
+	
 	public Task()
 	{
 		

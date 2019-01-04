@@ -1,25 +1,98 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
     <div style="text-align:left">
-        <table>
-            <tr>
-                <td>
-                        Project:
-                </td>
-                <td>
-                        <input type="text" [(ngModel)]="projectDesc" name="projectDesc" class="inputBoxSetting3" readonly required style="width:80%"/>
-                        &nbsp;
-                                <button type="button" (click)="addProject()" class="btn btn-primary btn-sm black-background white" data-toggle="modal" data-target="#myProjectModal">Search</button>
-                </td>
-            </tr>
-           
+        <table style="width:100%">
+                <tr>
+                        <td style="width:50%">
+                                <table style="width:50%">
+                                <tr>
+                                        <td style="width:30%">
+                                                Project:
+                                        </td>
+                                        <td style="width:90%">
+                                                <input type="text" [(ngModel)]="projectDesc" name="projectDesc" class="inputBoxSetting3" readonly required style="width:80%"/>
+                                                &nbsp;
+                                                        <button type="button" (click)="addProject()" class="btn btn-primary btn-sm black-background white" data-toggle="modal" data-target="#myProjectModal">Search</button>
+                                        </td>
+                                </tr>
+                                
+                                </table>
+                        </td>
+                        <td [hidden]="taskData===null" style="width:40%">
+                                        Sort : <button name="startDate" (click)='setOrder($event)' style="width:15%" class="btn btn-primary btn-xs black-background white" >Start Date</button>
+                                        <button name="endDate" (click)='setOrder($event)' style="width:15%" class="btn btn-primary btn-xs black-background white" >End Date</button>
+                                        <button name="priority" (click)='setOrder($event)' style="width:15%" class="btn btn-primary btn-xs black-background white" >Priority</button>
+                                        
+                        </td>
+                </tr>
         </table>
 
 
     </div>
-    <div ng-hide="taskData===null">
 
-    </div>    
+    <div [hidden]="taskData===1" *ngFor="let task of taskData |orderBy:orderByData:reverse:true" class="divSetting">
+        <table style="width:100%">
+                <tr>
+                        <th style="width:20%">
+                                Task
+                        </th>
+                        <th style="width:20%">
+                                Parent
+                        </th>
+                        <th>
+                                Priority
+                        </th>
+                        <th>
+                                Start
+                        </th>
+                        <th>
+                                End
+                        </th>
+                        <th>
+                                Status
+                        </th>
+                        <th>
+                                &nbsp;
+                        </th>
+                        <th>
+                                &nbsp;
+                        </th>
+                </tr>
+                <tr>
+                        <td style="width:20%">
+                                <div style="width:15%;border:2px thin">
+                                                {{task.task}}
+                                        </div>
+                        </td>
+                        <td style="width:20%">
+
+                                        {{task.parentTask.parentTaskDesc}}
+                                        
+                        </td>
+                        <td>
+                                        {{task.priority}}
+                        </td>
+                        <td>
+                                        {{task.startDate}}
+                        </td>
+                        <td>
+                                        {{task.endDate}}
+                        </td>
+                        <td>
+                                        {{task.status}}
+                        </td>
+                        <td>
+                                        <button name="editTask" (click)='editTask(task.taskId)' style="width:60%" class="btn btn-primary btn-xs black-background white" [disabled]="task.status==='Suspended' || task.status==='Completed'">Edit</button>
+                        </td>
+                        <td>
+                                        <button name="endTask" (click)='endTask(task.taskId)' style="width:60%" class="btn btn-primary btn-xs black-background white" [disabled]="task.status==='Suspended' || task.status==='Completed'">End Task</button>
+                        </td>
+                </tr>
+                                   
+        </table>                               
+    </div>
+
+                        
    
       <div class="modal fade" id="myProjectModal" role="document">
         <div class="modal-dialog">

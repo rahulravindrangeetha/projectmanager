@@ -1,12 +1,14 @@
 package com.projectmanagerapp.serviceimpl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import com.projectmanagerapp.entity.ParentTask;
 import com.projectmanagerapp.entity.Task;
 import com.projectmanagerapp.repo.TaskRepo;
 import com.projectmanagerapp.service.TaskService;
@@ -72,7 +74,18 @@ public class TaskServiceImpl implements TaskService
 	@Override
 	public List<Task> getAllTasks(int projectId) 
 	{
-		return taskRepo.getAllTasks(projectId);
+		List<Task> tasks=taskRepo.getAllTasks(projectId);
+		List<Task> noParentTask=tasks.stream().filter(t -> t.getParentTask()==null).collect(Collectors.toList());
+		List<Task> withParentTask=tasks.stream().filter(t -> t.getParentTask()!=null).collect(Collectors.toList());
+		for(Task task:noParentTask)
+		{
+			task.setParentTask(new ParentTask("This Task has no Parent"));
+		}
+		tasks.clear();
+		tasks.addAll(noParentTask);
+		tasks.addAll(withParentTask);
+		
+		return tasks;
 	}
 
 }
