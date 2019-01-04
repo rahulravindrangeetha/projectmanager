@@ -26,19 +26,18 @@ export class TaskService
         
     }
 
-    endTask(taskId:number)
+    endTask(taskId:number) : Observable<any>
     {
         return this.http.put("http://localhost:8181/ProjectManagerApp/tasks/endtask/"+taskId,null); 
     }
 
-    getTasks(projectId:number)
+    getTasks(projectId:number) : Observable<any>
     {
         return this.http.get("http://localhost:8181/ProjectManagerApp/tasks/project/"+projectId);
     }
 
-    getATask(taskId:number)
+    getATask(taskId:number): Observable<any>
     {
-        
         return this.http.get("http://localhost:8181/ProjectManagerApp/tasks/"+taskId);
     }
 

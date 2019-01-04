@@ -31,7 +31,7 @@ export class EditTaskComponent
   title = 'Edit Task';
   data: any;
   users : any;
-  taskData : any;
+  taskData :  any;
   taskId : number;
   parentTaskData:any;
   orderByData:string='startDate';
@@ -55,7 +55,7 @@ export class EditTaskComponent
     step: 1,
     noSwitching: false
   };
-
+  status: string;
   projectDesc: string;
   projectDescTemp: string;
   startDate:Date;
@@ -89,37 +89,9 @@ export class EditTaskComponent
     this.taskUserId=user.userId;
   }
 
-  addProjectData(projectObj:Project)
-  {
-    this.projectDescTemp=projectObj.project;
-    this.projectId=projectObj.projectId;
-  }
-
-  addParentTaskData(parentData:ParentTask)
-  {
-    this.parentTaskDescTemp=parentData.parentTaskDesc;
-    this.parentTaskId=parentData.id;
-  }
-
   assignFn()
   {
     this.taskOwnerName=this.taskOwnerNameTemp;
-  }
-
-  assignParentTaskFn()
-  {
-    this.parentTaskDesc=this.parentTaskDescTemp;
-  }
-
-  assignProjectFn()
-  {
-    this.projectDesc=this.projectDescTemp;
-    this.parentTaskId=null;
-    this.parentTaskDesc=null;
-    this.parentTaskDescTemp=null;
-    this.parentTaskService.getAllParentTaskOfProjects(this.projectId).subscribe(
-      resp=>{this.parentTaskData=resp},error=>{console.log(error,"error")}
-    );
   }
 
   constructor(public projectService : ProjectService,
@@ -167,28 +139,22 @@ export class EditTaskComponent
       this.usersService.getAllUsers().subscribe(
         resp=>{this.users=resp},error=>{console.log(error,"error")}
       );
-      this.projectService.getAllNonSuspendedProjects().subscribe(
-        resp=>{this.data=resp},error=>{console.log(error,"error")}
-      );
       this.route.params.subscribe(params=>
         {
           this.taskId=+params['taskId'];
-         
-
         });
 
-        alert('this.taskId'+this.taskId);
-        
         this.taskService.getATask(this.taskId).subscribe(
-          resp=>{this.taskData=resp},error=>{console.log(error,"error")}
-        );
-      alert('hi');  
-      this.taskDesc=this.taskData.task;
+          resp=>{
+            this.taskData=resp;
+            this.taskDesc=this.taskData.task;
+            this.status=this.taskData.status;
       this.projectDesc=this.taskData.project.project;
       this.projectDescTemp=this.taskData.project.project;
       this.projectId=this.taskData.project.projectId;
-      if(!this.taskData.parentTask===null)
+      if(!(this.taskData.parentTask===null))
       {
+
         this.parentTaskDesc=this.taskData.parentTask.parentTaskDesc;
         this.parentTaskDescTemp=this.taskData.parentTask.parentTaskDesc;
         this.parentTaskId=this.taskData.parentTask.id;
@@ -197,8 +163,13 @@ export class EditTaskComponent
       this.taskOwnerNameTemp=this.taskData.taskManager.firstName+' '+this.taskData.taskManager.lastName;
       this.taskUserId=this.taskData.taskManager.userId;
       this.priority=this.taskData.priority;
-      this.startDate=new Date(this.taskData.startDate);
-      this.endDate=new Date(this.taskData.endDate);
+      let startDateData=this.taskData.startDate.split('-');
+      this.startDate=new Date(startDateData[1]+'-'+startDateData[0]+'-'+startDateData[2]);
+      let endDateData=this.taskData.endDate.split('-');
+      this.endDate=new Date(endDateData[1]+'-'+endDateData[0]+'-'+endDateData[2]);
+          },error=>{console.log(error,"error")}
+        ); 
+      
     }
 
     setOrder(event)
@@ -217,17 +188,12 @@ export class EditTaskComponent
       
     }
 
-    addTask()
+    updateTask()
     {
-
-      this.project.project=this.projectDesc;
-      this.project.priority=this.priority;
-
-      this.project.projectManager= new Users();
-      //this.project.projectManager.userId=this.managerUserId;
-      if(!this.checkBoxVal)
-      {
-        this.task.task=this.taskDesc
+        
+        this.task.task=this.taskDesc;
+        this.task.taskId=this.taskId;
+        this.task.status=this.status;
         this.task.project=new Project();
         this.task.project.projectId=this.projectId;
         this.task.priority=this.priority;
@@ -263,7 +229,6 @@ export class EditTaskComponent
       }
 
       this.task.startDate=dayString+'-'+monthString+'-'+dateData.getFullYear();
-      alert(this.task.startDate);
       dateData =this.endDate;
       month=dateData.getMonth()+1;
       if(month<10)
@@ -292,22 +257,21 @@ export class EditTaskComponent
 
       if(endDateComparison>=startDateComparison)
       {
-          alert(this.task.project.projectId);
-          this.taskService.createTask(this.task).subscribe();
+          this.taskService.updateTask(this.task).subscribe(
+            resp=>
+            {
+              this.clearForm();
+              alert('kkkk');
+              this.ngOnInit();
+              alert('llllll');
+            },
+            error=>{console.log(error,"error")}
+          );
       }
       else
       {
         alert('Task End Date should be greater than Start Date');
       }
-    }
-    else
-    {
-      this.parentTask.parentTaskDesc=this.taskDesc;
-      this.parentTask.project=new Project();
-      this.parentTask.project.projectId=this.projectId;
-      alert(this.parentTask.project.projectId);
-      this.parentTaskService.createParentTask(this.parentTask).subscribe();
-    }
-
+    
 }
 }
