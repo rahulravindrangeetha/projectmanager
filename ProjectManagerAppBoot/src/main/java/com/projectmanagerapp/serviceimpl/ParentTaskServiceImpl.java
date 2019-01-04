@@ -20,7 +20,6 @@ public class ParentTaskServiceImpl implements ParentTaskService
 	ParentTaskRepo parentTaskRepo;
 
 	@Override
-	@Cacheable("parenttask")
 	public List<ParentTask> getAllParentTask(int projectId) 
 	{
 		// TODO Auto-generated method stub
@@ -28,7 +27,6 @@ public class ParentTaskServiceImpl implements ParentTaskService
 	}
 	
 	@Override
-	@CacheEvict("parenttask")
 	public void createParentTask(ParentTask parentTask) 
 	{
 		parentTaskRepo.save(parentTask);

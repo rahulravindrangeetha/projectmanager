@@ -50,7 +50,6 @@ public class ProjectServiceImpl implements ProjectService
 		return projects;
 	}
 	
-	@Cacheable("suspendedprojects")
 	public List<Project> getAllNonSuspendedProjects() 
 	{
 		List<Project> projects=projectRepo.getAllNonSuspendedProject();
@@ -75,14 +74,14 @@ public class ProjectServiceImpl implements ProjectService
 
 	
 	@Override
-	@CacheEvict(value="projects",allEntries=true)
+	@CacheEvict(value= {"projects"},allEntries=true)
 	public void updateProject(Project updatedProject) 
 	{
 		projectRepo.save(updatedProject);
 	}
 
 	@Override
-	@CacheEvict(value="projects",allEntries=true)
+	@CacheEvict(value= {"projects"},allEntries=true)
 	public void createProject(Project newProject) 
 	{
 		projectRepo.save(newProject);
@@ -90,7 +89,7 @@ public class ProjectServiceImpl implements ProjectService
 	}
 
 	@Override
-	@CacheEvict(value= {"projects","suspendedprojects"},allEntries=true)
+	@CacheEvict(value= {"projects"},allEntries=true)
 	public void suspendProject(int projectId) throws ProjectNotFoundException
 	{
 		Project project=projectRepo.findOne(projectId);

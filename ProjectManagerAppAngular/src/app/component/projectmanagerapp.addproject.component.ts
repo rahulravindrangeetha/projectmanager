@@ -95,6 +95,19 @@ export class AddProjectComponent
       );
     }
 
+    resetForm()
+    {
+      this.projectDesc=null;
+      this.startDate=null;
+      this.endDate=null;
+      this.managerUserId=null;
+      this.managerName=null;
+      this.managerNameTemp=null;
+      this.priority=0;
+      this.checkBoxVal=false;
+    }
+
+
     setOrder(event)
     {
       var buttonName= event.target.name;
@@ -176,7 +189,16 @@ export class AddProjectComponent
     if(endDateComparison>=startDateComparison)
     {
 
-    this.projectService.createProject(this.project).subscribe();
+    this.projectService.createProject(this.project).subscribe(
+      resp=>{
+        this.resetForm();
+        this.ngOnInit();
+        
+      },
+      error=>
+      {console.log(error,"error")
+    }
+    );
     }
     else
     {
@@ -185,7 +207,16 @@ export class AddProjectComponent
     }
     else
     {
-      this.projectService.createProject(this.project).subscribe();
+      this.projectService.createProject(this.project).subscribe(
+        resp=>{
+          this.resetForm();
+          this.ngOnInit();
+          
+        },
+        error=>
+        {console.log(error,"error")
+      }
+      );
     }
 
 }
@@ -280,7 +311,18 @@ updateProject()
     if(endDateComparison>=startDateComparison)
     {
 
-    this.projectService.updateProject(this.project).subscribe();
+    this.projectService.updateProject(this.project).subscribe(
+      resp=>{
+        this.projectId=null;
+        this.visible=false;
+        this.resetForm();
+        this.ngOnInit();
+        
+      },
+      error=>
+      {console.log(error,"error")
+    }
+    );
     }
     else
     {
@@ -293,7 +335,18 @@ else
   {
     this.project.startDate=null;
     this.project.endDate=null;
-    this.projectService.updateProject(this.project).subscribe();
+    this.projectService.updateProject(this.project).subscribe(
+      resp=>{
+        this.projectId=null;
+        this.visible=false;
+        this.resetForm();
+        this.ngOnInit();
+        
+      },
+      error=>
+      {console.log(error,"error")
+    }
+    );
   }
 }
 

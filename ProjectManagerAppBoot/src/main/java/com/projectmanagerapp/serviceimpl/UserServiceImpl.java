@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService
 	}
 
 	@Override
-	@CacheEvict("users")
+	@CacheEvict(value="users",allEntries=true)
 	public void updateUser(Users updatedUser) 
 	{
 		Users user = userRepo.findOne(updatedUser.getUserId());
@@ -63,14 +63,14 @@ public class UserServiceImpl implements UserService
 	}
 
 	@Override
-	@CacheEvict("users")
+	@CacheEvict(value="users",allEntries=true)
 	public void createUser(Users newUser) 
 	{
 		userRepo.save(newUser);		
 	}
 
 	@Override
-	@CacheEvict("users")
+	@CacheEvict(value="users",allEntries=true)
 	public void deleteUser(int userId) throws UserNotFoundException
 	{
 		// TODO Auto-generated method stub

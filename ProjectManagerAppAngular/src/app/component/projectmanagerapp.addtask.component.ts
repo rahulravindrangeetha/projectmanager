@@ -234,7 +234,7 @@ export class AddTaskComponent
       }
 
       this.task.startDate=dayString+'-'+monthString+'-'+dateData.getFullYear();
-      alert(this.task.startDate);
+
       dateData =this.endDate;
       month=dateData.getMonth()+1;
       if(month<10)
@@ -257,14 +257,24 @@ export class AddTaskComponent
 
       this.task.endDate=dayString+'-'+monthString+'-'+dateData.getFullYear();
 
-
-      let startDateComparison = new Date(this.task.startDate);
-      let endDateComparison = new Date(this.task.endDate);
+      let startDateData=this.task.startDate.split('-');
+      let endDateData=this.task.endDate.split('-');
+      let startDateComparison = new Date(startDateData[1]+'-'+startDateData[0]+'-'+startDateData[2]);
+      let endDateComparison = new Date(endDateData[1]+'-'+endDateData[0]+'-'+endDateData[2]);
 
       if(endDateComparison>=startDateComparison)
       {
-          alert(this.task.project.projectId);
-          this.taskService.createTask(this.task).subscribe();
+          this.taskService.createTask(this.task).subscribe(
+            resp=>{
+              this.clearForm();
+              this.ngOnInit();
+              this.startDate=null;
+              this.endDate=null;
+            },
+            error=>
+            {console.log(error,"error")
+          }
+          );
       }
       else
       {
@@ -276,8 +286,17 @@ export class AddTaskComponent
       this.parentTask.parentTaskDesc=this.taskDesc;
       this.parentTask.project=new Project();
       this.parentTask.project.projectId=this.projectId;
-      alert(this.parentTask.project.projectId);
-      this.parentTaskService.createParentTask(this.parentTask).subscribe();
+      this.parentTaskService.createParentTask(this.parentTask).subscribe(
+        resp=>{
+          this.clearForm();
+          this.ngOnInit();
+          this.startDate=null;
+          this.endDate=null;
+        },
+        error=>
+        {console.log(error,"error")
+      }
+      );
     }
 
 }

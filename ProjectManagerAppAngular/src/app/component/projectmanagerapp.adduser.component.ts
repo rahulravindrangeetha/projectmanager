@@ -69,10 +69,19 @@ export class AddUserComponent
 
   addUser()
   {
+    this.user = new Users();
       this.user.employeeId=this.employeeId;
       this.user.firstName=this.firstName;
       this.user.lastName=this.lastName;
-      this.usersService.createNewUser(this.user).subscribe();
+      this.usersService.createNewUser(this.user).subscribe(
+        resp=>{
+          this.resetForm();
+          this.ngOnInit();
+        },
+        error=>
+        {console.log(error,"error")
+      }
+      );
   }
 
   resetForm()
@@ -89,14 +98,34 @@ export class AddUserComponent
       this.user.firstName=this.firstName;
       this.user.lastName=this.lastName;
       this.user.userId=this.userId;
-      this.usersService.updateUser(this.user).subscribe();
+      this.usersService.updateUser(this.user).subscribe(
+        resp=>{
+          this.userId=null;
+          this.visible=false;
+          this.resetForm();
+          this.ngOnInit();
+        },
+        error=>
+        {console.log(error,"error")
+      }
+      );
   }
 
   deleteUser(userId:number)
   {
     if(confirm('Are you sure you want to delete this user ?'))
     {
-      this.usersService.deleteUser(userId).subscribe();
+      this.usersService.deleteUser(userId).subscribe(
+        resp=>{
+          this.userId=null;
+          this.visible=false;
+          this.resetForm();
+          this.ngOnInit();
+        },
+        error=>
+        {console.log(error,"error")
+      }
+      );
     }
   }
 
