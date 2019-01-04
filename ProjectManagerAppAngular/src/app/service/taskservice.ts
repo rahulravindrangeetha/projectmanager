@@ -36,5 +36,11 @@ export class TaskService
         return this.http.get("http://localhost:8181/ProjectManagerApp/tasks/project/"+projectId);
     }
 
+    getATask(taskId:number)
+    {
+        
+        return this.http.get("http://localhost:8181/ProjectManagerApp/tasks/"+taskId);
+    }
+
 
 }

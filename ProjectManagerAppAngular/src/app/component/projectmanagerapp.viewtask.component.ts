@@ -73,6 +73,7 @@ export class ViewTaskComponent
 
   editTask(taskId:number)
   {
+    this.router.navigate(['/edittask/'+taskId]);
 
   }
   endTask(taskId:number)

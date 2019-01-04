@@ -6,12 +6,14 @@ import { AddUserComponent } from './component/projectmanagerapp.adduser.componen
 import { AddProjectComponent } from './component/projectmanagerapp.addproject.component';
 import { AddTaskComponent } from './component/projectmanagerapp.addtask.component';
 import { ViewTaskComponent } from './component/projectmanagerapp.viewtask.component';
+import { EditTaskComponent } from './component/projectmanagerapp.edittask.component';
 
 const routes: Routes = [
   {path:'adduser',component:AddUserComponent},
    {path:'addproject',component:AddProjectComponent},
    {path:'addtask',component:AddTaskComponent},
-   {path:'viewtask',component:ViewTaskComponent}
+   {path:'viewtask',component:ViewTaskComponent},
+   {path:'edittask/:taskId',component:EditTaskComponent}
 ];
 
 @NgModule({
