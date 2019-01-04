@@ -16,5 +16,7 @@ public interface TaskService
 	public void createTask(Task newTask);
 	
 	public void endTask(Task endTask);
+	
+	public List<Task> getAllTasks(int projectId);
 
 }

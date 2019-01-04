@@ -41,6 +41,13 @@ public class TaskController
 		return new ResponseEntity(task,HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/project/{projectId}",method=RequestMethod.GET)
+	public ResponseEntity getAllTasks(@PathVariable("projectId") int projectId) throws TaskNotFoundException
+	{
+		List<Task> tasks = taskService.getAllTasks(projectId);
+		return new ResponseEntity(tasks,HttpStatus.OK);
+	}
+	
 	@RequestMapping(method=RequestMethod.PUT)
 	public ResponseEntity updateATask(@RequestBody Task updatedTask) throws TaskNotFoundException
 	{

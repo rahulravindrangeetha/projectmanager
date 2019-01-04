@@ -30,12 +30,11 @@ public class Task implements Serializable
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private int taskId;
 	
-	@ManyToOne
+	@ManyToOne(optional=true)
 	@JoinColumn(name="PARENT_ID")
 	private ParentTask parentTask;
 	
 	@ManyToOne
-	@JsonIgnore
 	@JoinColumn(name="PROJECT_ID")
 	private Project project;
 	

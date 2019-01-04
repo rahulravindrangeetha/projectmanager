@@ -39,6 +39,13 @@ public class ProjectController
 		return new ResponseEntity(projects,HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/nonsuspendedproject",method=RequestMethod.GET)
+	public ResponseEntity getAllNonSuspendedProjects()
+	{
+		List<Project> projects = projectService.getAllNonSuspendedProjects();
+		return new ResponseEntity(projects,HttpStatus.OK);
+	}
+	
 	@RequestMapping(value="/{projectId}",method=RequestMethod.GET)
 	public ResponseEntity getAProjectDetail(@PathVariable("projectId") int projectId) throws ProjectNotFoundException
 	{

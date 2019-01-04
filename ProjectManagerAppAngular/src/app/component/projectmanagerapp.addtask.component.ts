@@ -64,6 +64,22 @@ export class AddTaskComponent
   parentTaskDesc: string;
   parentTaskDescTemp: string;
 
+  clearForm()
+  {
+    this.projectDesc=null;
+    this.projectDescTemp=null;
+    this.priority=0;
+    this.startDate=null;
+    this.endDate=null;
+    this.parentTaskId=null;
+    this.parentTaskDesc=null;
+    this.parentTaskDescTemp=null;
+    this.taskUserId=null;
+    this.taskOwnerName=null;
+    this.taskOwnerNameTemp=null;
+    this.taskDesc=null;
+  }
+
   addTaskManager(user:any)
   {
     this.taskOwnerNameTemp=user.firstName+' '+user.lastName;
@@ -95,6 +111,9 @@ export class AddTaskComponent
   assignProjectFn()
   {
     this.projectDesc=this.projectDescTemp;
+    this.parentTaskId=null;
+    this.parentTaskDesc=null;
+    this.parentTaskDescTemp=null;
     this.parentTaskService.getAllParentTaskOfProjects(this.projectId).subscribe(
       resp=>{this.parentTaskData=resp},error=>{console.log(error,"error")}
     );
@@ -145,7 +164,7 @@ export class AddTaskComponent
       this.usersService.getAllUsers().subscribe(
         resp=>{this.users=resp},error=>{console.log(error,"error")}
       );
-      this.projectService.getAllProjects().subscribe(
+      this.projectService.getAllNonSuspendedProjects().subscribe(
         resp=>{this.data=resp},error=>{console.log(error,"error")}
       );
       this.startDate=new Date();
@@ -182,8 +201,13 @@ export class AddTaskComponent
         this.task.task=this.taskDesc
         this.task.project=new Project();
         this.task.project.projectId=this.projectId;
+        this.task.priority=this.priority;
+        if(this.parentTaskDescTemp!=null && this.parentTaskDescTemp!=''
+        )
+        {
         this.task.parentTask=new ParentTask();
         this.task.parentTask.id=this.parentTaskId;
+      }
         this.task.taskManager=new Users();
         this.task.taskManager.userId=this.taskUserId;
 
@@ -239,7 +263,7 @@ export class AddTaskComponent
 
       if(endDateComparison>=startDateComparison)
       {
-
+          alert(this.task.project.projectId);
           this.taskService.createTask(this.task).subscribe();
       }
       else

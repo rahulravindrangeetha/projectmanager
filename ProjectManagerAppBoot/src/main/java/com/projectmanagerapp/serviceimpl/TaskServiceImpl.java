@@ -1,5 +1,7 @@
 package com.projectmanagerapp.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -65,6 +67,12 @@ public class TaskServiceImpl implements TaskService
 		endTask.setStatus("Completed");
 		taskRepo.save(endTask);
 		
+	}
+
+	@Override
+	public List<Task> getAllTasks(int projectId) 
+	{
+		return taskRepo.getAllTasks(projectId);
 	}
 
 }

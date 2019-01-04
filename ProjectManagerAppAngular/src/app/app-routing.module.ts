@@ -5,11 +5,13 @@ import { ProjectManagerHyperLinkComponent } from './component/projectmanagerapp.
 import { AddUserComponent } from './component/projectmanagerapp.adduser.component';
 import { AddProjectComponent } from './component/projectmanagerapp.addproject.component';
 import { AddTaskComponent } from './component/projectmanagerapp.addtask.component';
+import { ViewTaskComponent } from './component/projectmanagerapp.viewtask.component';
 
 const routes: Routes = [
   {path:'adduser',component:AddUserComponent},
    {path:'addproject',component:AddProjectComponent},
-   {path:'addtask',component:AddTaskComponent}
+   {path:'addtask',component:AddTaskComponent},
+   {path:'viewtask',component:ViewTaskComponent}
 ];
 
 @NgModule({

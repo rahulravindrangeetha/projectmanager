@@ -31,5 +31,10 @@ export class TaskService
         return this.http.put("http://localhost:8181/ProjectManagerApp/tasks/endtask/"+taskId,null); 
     }
 
+    getTasks(projectId:number)
+    {
+        return this.http.get("http://localhost:8181/ProjectManagerApp/tasks/project/"+projectId);
+    }
+
 
 }

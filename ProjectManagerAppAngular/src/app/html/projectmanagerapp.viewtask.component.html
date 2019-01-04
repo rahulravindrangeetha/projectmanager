@@ -1,0 +1,72 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container">
+    <div style="text-align:left">
+        <table>
+            <tr>
+                <td>
+                        Project:
+                </td>
+                <td>
+                        <input type="text" [(ngModel)]="projectDesc" name="projectDesc" class="inputBoxSetting3" readonly required style="width:80%"/>
+                        &nbsp;
+                                <button type="button" (click)="addProject()" class="btn btn-primary btn-sm black-background white" data-toggle="modal" data-target="#myProjectModal">Search</button>
+                </td>
+            </tr>
+           
+        </table>
+
+
+    </div>
+    <div ng-hide="taskData===null">
+
+    </div>    
+   
+      <div class="modal fade" id="myProjectModal" role="document">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Search Project</h4>
+            </div>
+            <div class="modal-body">
+                <div style="text-align:left">
+                        <h3><input type="text" placeholder="Search" [(ngModel)]="projectSearch" style="padding-left:5px;width:100%;height:50px;font-size:14pt"/>
+                        </h3>
+                        &nbsp;&nbsp;
+                        <table style="width:100%">
+                                <tr>
+                                        <th style="width:34%">Project</th>
+                                        <th style="width:28%">Start Date</th>
+                                        <th style="width:28%">End Date</th>
+                                        <th style="width:10%">Priority</th>
+                                </tr>                            
+                                <tr *ngFor="let project of data | projectFilter:projectSearch" (click)='addProjectData(project)'  [ngClass]="{'rowClass': project.projectId===projectId}">
+                                        <td style="width:34%">
+                                                <input type="text" [(ngModel)]="project.project" name="project" class="inputBoxSetting3" disabled />
+                                        </td>
+                                        <td style="width:28%">
+                                                <input type="text" [(ngModel)]="project.startDate" name="startDate" class="inputBoxSetting3" disabled/>
+                                        </td>
+                                        <td style="width:28%">
+                                                <input type="text" [(ngModel)]="project.endDate" name="endDate" class="inputBoxSetting3" disabled />
+                                        </td>
+                                        <td style="width:10%">
+                                                <input type="text" [(ngModel)]="project.priority" name="priority" class="inputBoxSetting3" disabled />
+                                        </td>
+                                </tr>
+
+                        </table>
+                </div>
+            </div>
+            <div class="modal-footer d-flex">
+              <button type="button" class="btn btn-default" data-dismiss="modal" (click)=assignProjectFn()>Select</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+     </div>
+

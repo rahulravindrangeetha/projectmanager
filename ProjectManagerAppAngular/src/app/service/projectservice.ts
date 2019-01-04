@@ -18,6 +18,11 @@ export class ProjectService
         return this.http.get("http://localhost:8181/ProjectManagerApp/projects");
     }
 
+    getAllNonSuspendedProjects()
+    {
+        return this.http.get("http://localhost:8181/ProjectManagerApp/projects/nonsuspendedproject");
+    }
+
     getProject(projectId: number)
     {
         return this.http.get("http://localhost:8181/ProjectManagerApp/projects/"+projectId);

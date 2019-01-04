@@ -22,5 +22,8 @@ public interface ProjectRepo extends JpaRepository<Project, Integer>
 	@Modifying(clearAutomatically=true)
 	@Query("UPDATE Task T SET T.status='Suspended' WHERE T.project.projectId = ?1")
 	void suspendProject(int projectId);
+	
+	@Query("select distinct new Project(p.projectId,p.project) from Project p join p.tasks as T with T.status<>'Suspended'")
+	List<Project> getAllNonSuspendedProject();
 
 }

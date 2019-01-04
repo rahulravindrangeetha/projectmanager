@@ -30,6 +30,7 @@ public class Project implements Serializable
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private int projectId;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="project",fetch=FetchType.LAZY)
 	private List<Task> tasks;
 	
@@ -186,6 +187,12 @@ public class Project implements Serializable
 		this.endDate = endDate;
 		this.priority = priority;
 		this.projectManager = projectManager;
+	}
+	
+	public Project(int projectId,String project)
+	{
+		this.projectId=projectId;
+		this.project=project;
 	}
 
 	public Project()

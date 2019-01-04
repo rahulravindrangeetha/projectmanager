@@ -9,6 +9,8 @@ public interface ProjectService
 {
 	public List<Project> getAllProjects();
 	
+	public List<Project> getAllNonSuspendedProjects();
+	
 	public Project getAProject(int projectId);
 	
 	public void updateProject(Project updatedProject);
