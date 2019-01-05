@@ -270,6 +270,7 @@ export class AddTaskComponent
               this.ngOnInit();
               this.startDate=null;
               this.endDate=null;
+              this.projectId=null;
             },
             error=>
             {console.log(error,"error")
@@ -292,6 +293,7 @@ export class AddTaskComponent
           this.ngOnInit();
           this.startDate=null;
           this.endDate=null;
+          this.projectId=null;
         },
         error=>
         {console.log(error,"error")

@@ -185,7 +185,7 @@
                         &nbsp;&nbsp;
                         <table style="width:50%">
                                 <tr>
-                                        <th style="width:34%">Project</th>
+                                        <th style="width:34%">Parent Task</th>
                                 </tr>                            
                                 <tr *ngFor="let parentTask of parentTaskData | parentTaskFilter:parentTaskSearch" (click)='addParentTaskData(parentTask)'  [ngClass]="{'rowClass': parentTask.id===parentTaskId}">
                                         <td style="width:100%">

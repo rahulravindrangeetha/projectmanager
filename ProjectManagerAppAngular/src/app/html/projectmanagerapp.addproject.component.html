@@ -5,10 +5,10 @@
         <table>
             <tr>
                 <td>
-                        Project:
+                        <h3>Project:</h3>
                 </td>
                 <td>
-                        <input type="text" [(ngModel)]="projectDesc" name="project" class="inputBoxSetting3" required/>
+                        <h3><input type="text" [(ngModel)]="projectDesc" name="project" class="inputBoxSetting3" required/></h3>
                 </td>
             </tr>
             <tr>
@@ -20,18 +20,17 @@
                    </td>
             </tr>
             <tr>
-                    <td>
-                            Priority:
+                    <td style="padding-top: 15px;padding-bottom: 15px">
+                            <h3>Priority:</h3>
                     </td>
-                    <td>
+                    <td style="padding-top: 15px;padding-bottom: 15px">
                                 <ng5-slider [(value)]="priority" [(ngModel)]="priority" [options]="options"></ng5-slider>
-                                {{priority}}
                                 
                     </td>
                 </tr>
                 <tr>
                         <td>
-                                Manager:
+                                <h3>Manager:</h3>
                         </td>
                         <td>
                                 <input type="text" [(ngModel)]="managerName" name="managerName" class="inputBoxSetting3" readonly required style="width:80%"/>
@@ -115,7 +114,7 @@
                                         <td>Priority</td>
                                 </tr>
                                 <tr>
-                                        <td>{{project.priority}}{{searchProject}}</td>
+                                        <td>{{project.priority}}</td>
                                 </tr>
                             </table>
                     </td>

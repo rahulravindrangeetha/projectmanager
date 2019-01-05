@@ -5,33 +5,33 @@
         <table>
             <tr>
                 <td>
-                        First Name:
+                       <h2> First Name:</h2>
                 </td>
                 <td>
-                        <input type="text" [(ngModel)]="firstName" name="firstName" class="inputBoxSetting3" required/>
+                       <h2> <input type="text" [(ngModel)]="firstName" name="firstName" class="inputBoxSetting3" required/></h2>
                 </td>
             </tr>
             <tr>
                     <td>
-                            Last Name:
+                            <h2>Last Name:</h2>
                     </td>
                     <td>
-                            <input type="text" [(ngModel)]="lastName" name="lastName" class="inputBoxSetting3" required/>
+                            <h2><input type="text" [(ngModel)]="lastName" name="lastName" class="inputBoxSetting3" required/></h2>
                     </td>
                 </tr>
                 <tr>
                         <td>
-                                Employee Id:
+                                <h2>Employee Id:</h2>
                         </td>
                         <td>
-                                <input type="text" pattern="[1-9][0-9]*" [(ngModel)]="employeeId" name="employeeId" class="inputBoxSetting3" required/>
+                                <h2><input type="text" pattern="[1-9][0-9]*" [(ngModel)]="employeeId" name="employeeId" class="inputBoxSetting3" required/></h2>
                         </td>
                     </tr>
         </table>
-        <table>
+        <table style="width:60%">
             <tr>
-                    <td [hidden]="visible" style="text-align:center;padding-top:70px;"><button type="button" (click)="addUser()" class="btn btn-primary btn-lg black-background white" [disabled]="!addUserForm.form.valid">Add</button></td>
-                    <td [hidden]="!visible" style="text-align:center;padding-top:70px;"><button type="button" (click)="updateUser()" class="btn btn-primary btn-lg black-background white" [disabled]="!addUserForm.form.valid">Update</button></td>
+                    <td [hidden]="visible" style="text-align:right;padding-top:70px;padding-right:20px"><button type="button" (click)="addUser()" class="btn btn-primary btn-lg black-background white" [disabled]="!addUserForm.form.valid">Add</button></td>
+                    <td [hidden]="!visible" style="text-align:right;padding-top:70px;padding-right:20px"><button type="button" (click)="updateUser()" class="btn btn-primary btn-lg black-background white" [disabled]="!addUserForm.form.valid">Update</button></td>
                     <td style="text-align:left;padding-top:70px;"><button type="button" (click)="resetForm()" class="btn btn-primary btn-lg black-background white">Reset</button></td>
         
             </tr>
@@ -40,18 +40,30 @@
 
     </div>
     </form>
+    &nbsp;&nbsp;&nbsp;
     <div style="text-align:left">
-        <h3><input type="text" placeholder="Search" [(ngModel)]="userSearch" style="padding-left:5px;width:100%;height:50px;font-size:14pt"/>
-                Sort : <button name="firstName" (click)='setOrder($event)' style="width:90%" class="btn btn-primary btn-lg black-background white" >First Name</button><button name="lastName" (click)='setOrder($event)' style="width:90%" class="btn btn-primary btn-lg black-background white" >Last Name</button><button name="employeeId" (click)='setOrder($event)' style="width:90%" class="btn btn-primary btn-lg black-background white" >Employee Id</button>
-        </h3>
-        &nbsp;&nbsp;
+        <table style="width: 100%">
+                <tr>
+                        <td>
+                                        <h3><input type="text" placeholder="Search" [(ngModel)]="userSearch" style="padding-left:5px;width:100%;height:50px;font-size:14pt"/>
+                                        </h3>
+                        </td>
+                        <td style="padding-left: 30px">
+                                        <h3>
+                                                        Sort : <button name="firstName" (click)='setOrder($event)' style="width:20%" class="btn btn-primary btn-lg black-background white" >First Name</button>&nbsp;&nbsp;<button name="lastName" (click)='setOrder($event)' style="width:20%" class="btn btn-primary btn-lg black-background white" >Last Name</button>&nbsp;&nbsp;<button name="employeeId" (click)='setOrder($event)' style="width:20%" class="btn btn-primary btn-lg black-background white" >Employee Id</button>
+                                        </h3>
+                                
+                        </td>
+                </tr>
+        </table>
+&nbsp;&nbsp;&nbsp;
         <div *ngFor="let user of data | userFilter:userSearch | orderBy:orderByData:reverse:true" class="divSetting">
             <table style="width:100%">
                 <tr>
                     <td style="width:20%">
                         <input type="text" [(ngModel)]="user.firstName" name="firstName" class="inputBoxSetting3" disabled />
                     </td>
-                    <td style="width:20%">
+                    <td style="width:20%;padding-left:10px">
                             <button name="edit" (click)='editUser(user)' style="width:90%" class="btn btn-primary btn-lg black-background white">Edit</button>{{userSearch}}
                     </td>
                 </tr>
@@ -59,7 +71,7 @@
                         <td style="width:20%">
                             <input type="text" [(ngModel)]="user.lastName" name="lastName" class="inputBoxSetting3" disabled/>
                         </td>
-                        <td style="width:20%">
+                        <td style="width:20%;padding-left:10px">
                                 <button name="delete" (click)='deleteUser(user.userId)' style="width:90%" class="btn btn-primary btn-lg black-background white">Delete</button>
                         </td>
                 </tr>
@@ -67,7 +79,7 @@
                         <td style="width:20%">
                             <input type="text" [(ngModel)]="user.employeeId" name="employeeId" class="inputBoxSetting3" disabled />
                         </td>
-                        <td style="width:20%">
+                        <td style="width:20%;padding-left:10px">
                                 &nbsp;
                         </td>
                 </tr>
