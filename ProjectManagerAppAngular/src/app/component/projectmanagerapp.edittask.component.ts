@@ -69,14 +69,9 @@ export class EditTaskComponent
 
   clearForm()
   {
-    this.projectDesc=null;
-    this.projectDescTemp=null;
     this.priority=0;
     this.startDate=null;
     this.endDate=null;
-    this.parentTaskId=null;
-    this.parentTaskDesc=null;
-    this.parentTaskDescTemp=null;
     this.taskUserId=null;
     this.taskOwnerName=null;
     this.taskOwnerNameTemp=null;
@@ -251,22 +246,21 @@ export class EditTaskComponent
 
       this.task.endDate=dayString+'-'+monthString+'-'+dateData.getFullYear();
 
-
-      let startDateComparison = new Date(this.task.startDate);
-      let endDateComparison = new Date(this.task.endDate);
+      let startDateData=this.task.startDate.split('-');
+      let endDateData=this.task.endDate.split('-');
+      let startDateComparison = new Date(startDateData[1]+'-'+startDateData[0]+'-'+startDateData[2]);
+      let endDateComparison = new Date(endDateData[1]+'-'+endDateData[0]+'-'+endDateData[2]);
 
       if(endDateComparison>=startDateComparison)
       {
           this.taskService.updateTask(this.task).subscribe(
             resp=>
             {
-              this.clearForm();
-              alert('kkkk');
-              this.ngOnInit();
-              alert('llllll');
             },
             error=>{console.log(error,"error")}
           );
+          this.router.navigate(['/viewtask']);
+
       }
       else
       {

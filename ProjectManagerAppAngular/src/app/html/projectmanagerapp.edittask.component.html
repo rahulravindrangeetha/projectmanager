@@ -5,62 +5,62 @@
         <table>
             <tr>
                 <td>
-                        Project:
+                        <h3>Project:</h3>
                 </td>
                 <td>
-                        <input type="text" [(ngModel)]="projectDesc" name="projectDesc" class="inputBoxSetting3" readonly required style="width:80%" disabled/>
+                        <h3><input type="text" [(ngModel)]="projectDesc" name="projectDesc" class="inputBoxSetting3" readonly required style="width:100%" disabled/></h3>
                         &nbsp;
                 
                 </td>
             </tr>
             <tr>
                     <td>
-                        Task:
+                        <h3>Task:</h3>
                     </td>
                     <td>
-                        <input type="text" [(ngModel)]="taskDesc" name="task" class="inputBoxSetting3" required/>
+                        <h3><input type="text" [(ngModel)]="taskDesc" name="task" class="inputBoxSetting3" required style="width:100%"/></h3>
                     </td>
             </tr>
             <tr>
                     <td>
-                            Parent Task:
+                            <h3>Parent Task:</h3>
                     </td>
                     
                         <td>
-                                <input type="text" disabled [(ngModel)]="parentTaskDesc" name="parentTaskDesc" class="inputBoxSetting3" readonly style="width:80%" />
+                        <h3><input type="text" disabled [(ngModel)]="parentTaskDesc" name="parentTaskDesc" class="inputBoxSetting3" readonly style="width:100%" /></h3>
 
                         </td>
                    
                 </tr>
                 <tr>
-                        <td>
-                                Priority:
+                        <td style="padding-top: 20px;padding-bottom: 20px">
+                                <h3>Priority:</h3>
                         </td>
-                        <td>
+                        <td style="padding-top: 20px;padding-bottom: 20px">
                                     <ng5-slider [(value)]="priority"  [(ngModel)]="priority" [options]="options"></ng5-slider>                                   
                         </td>
                     </tr>
                     <tr>
                         <td>
-                                Start Date:<input type="text" bsDatepicker [disabled]="checkBoxVal" name="startDate" [(ngModel)]="startDate" [bsConfig]="bsConfig" readonly required class="inputBoxSetting3"/>
+                                <h3>Start Date:&nbsp;&nbsp;<input type="text" bsDatepicker [disabled]="checkBoxVal" name="startDate" [(ngModel)]="startDate" [bsConfig]="bsConfig" readonly required class="inputBoxSetting3" style="width:53%"/></h3>
                         </td>
                         <td>
-                                End Date:<input type="text" bsDatepicker [disabled]="checkBoxVal" name="endDate" [(ngModel)]="endDate" [bsConfig]="bsConfig" readonly required class="inputBoxSetting3"/>
+                                <h3>End Date:&nbsp;&nbsp;<input type="text" bsDatepicker [disabled]="checkBoxVal" name="endDate" [(ngModel)]="endDate" [bsConfig]="bsConfig" readonly required class="inputBoxSetting3" style="width:53%"/></h3>
                                     
                         </td>
                     </tr>
                 <tr>
                         <td>
-                                User:
+                                <h3>User:</h3>
                         </td>
                         <td>
-                                <input type="text" [disabled]="checkBoxVal" [(ngModel)]="taskOwnerName" name="taskOwnerName" class="inputBoxSetting3" readonly required style="width:80%"/>
-                                &nbsp;
-                                <button type="button" (click)="addManager()" [disabled]="checkBoxVal"  class="btn btn-primary btn-sm black-background white" data-toggle="modal" data-target="#myModal">Search</button>
+                                <h3><input type="text" [disabled]="checkBoxVal" [(ngModel)]="taskOwnerName" name="taskOwnerName" class="inputBoxSetting3" readonly required style="width:80%"/>
+                                &nbsp;&nbsp;
+                                <button type="button" (click)="addManager()" [disabled]="checkBoxVal"  class="btn btn-primary btn-sm black-background white" data-toggle="modal" data-target="#myModal">Search</button></h3>
                         </td>
                     </tr>
         </table>
-        <table>
+        <table style="width:100%">
             <tr>
                     <td  style="text-align:center;padding-top:70px;"><button type="button" (click)="updateTask()" class="btn btn-primary btn-lg black-background white" [disabled]="!addProjectForm.form.valid">Update</button></td>
                     <td style="text-align:left;padding-top:70px;"><button type="button" (click)="clearForm()" class="btn btn-primary btn-lg black-background white">Reset</button></td>
