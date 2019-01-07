@@ -31,6 +31,10 @@ export class AddTaskComponent
   data: any;
   users : any;
   parentTaskData:any;
+  searchProject:string;
+  managerSearchVal:string='';
+  projectSearchVal:string='';
+  parentTaskSearchVal:string='';
   orderByData:string='startDate';
   reverse : boolean = false;
   visible : boolean = false;

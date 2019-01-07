@@ -86,7 +86,7 @@
             </div>
             <div class="modal-body">
                 <div style="text-align:left">
-                        <h3><input type="text" placeholder="Search" [(ngModel)]="managerSearch" style="padding-left:5px;width:100%;height:50px;font-size:14pt"/>
+                        <h3><input type="text" placeholder="Search" [(ngModel)]="managerSearchVal" style="padding-left:5px;width:100%;height:50px;font-size:14pt"/>
                         </h3>
                         &nbsp;&nbsp;
                         <table style="width:100%">
@@ -95,7 +95,7 @@
                                         <th style="width:34%">Last Name</th>
                                         <th style="width:32%">Employee Id</th>
                                 </tr>                            
-                                <tr *ngFor="let user of users | userFilter:managerSearch" (click)='addTaskManager(user)'  [ngClass]="{'rowClass': user.userId===taskUserId}">
+                                <tr *ngFor="let user of users | userFilter:managerSearchVal" (click)='addTaskManager(user)'  [ngClass]="{'rowClass': user.userId===taskUserId}">
                                         <td style="width:34%">
                                                 <input type="text" [(ngModel)]="user.firstName" name="firstName" class="inputBoxSetting3" disabled />
                                         </td>
@@ -128,17 +128,17 @@
             </div>
             <div class="modal-body">
                 <div style="text-align:left">
-                        <h3><input type="text" placeholder="Search" [(ngModel)]="projectSearch" style="padding-left:5px;width:100%;height:50px;font-size:14pt"/>
+                        <h3><input type="text" placeholder="Search" [(ngModel)]="projectSearchVal" style="padding-left:5px;width:100%;height:50px;font-size:14pt"/>
                         </h3>
                         &nbsp;&nbsp;
                         <table style="width:100%">
                                 <tr>
-                                        <th style="width:34%">Project</th>
-                                        <th style="width:28%">Start Date</th>
-                                        <th style="width:28%">End Date</th>
-                                        <th style="width:10%">Priority</th>
+                                        <th style="width:34%"><h4><strong>Project</strong></h4></th>
+                                        <th style="width:28%"><h4><strong>Start Date</strong></h4></th>
+                                        <th style="width:28%"><h4><strong>End Date</strong></h4></th>
+                                        <th style="width:10%"><h4><strong>Priority</strong></h4></th>
                                 </tr>                            
-                                <tr *ngFor="let project of data | projectFilter:projectSearch" (click)='addProjectData(project)'  [ngClass]="{'rowClass': project.projectId===projectId}">
+                                <tr *ngFor="let project of data | projectFilter:projectSearchVal" (click)='addProjectData(project)'  [ngClass]="{'rowClass': project.projectId===projectId}">
                                         <td style="width:34%">
                                                 <input type="text" [(ngModel)]="project.project" name="project" class="inputBoxSetting3" disabled />
                                         </td>
@@ -175,14 +175,14 @@
             </div>
             <div class="modal-body">
                 <div style="text-align:left">
-                        <h3><input type="text" placeholder="Search" [(ngModel)]="parentTaskSearch" style="padding-left:5px;width:100%;height:50px;font-size:14pt"/>
+                        <h3><input type="text" placeholder="Search" [(ngModel)]="parentTaskSearchVal" style="padding-left:5px;width:100%;height:50px;font-size:14pt"/>
                         </h3>
                         &nbsp;&nbsp;
                         <table style="width:50%">
                                 <tr>
                                         <th style="width:34%">Parent Task</th>
                                 </tr>                            
-                                <tr *ngFor="let parentTask of parentTaskData | parentTaskFilter:parentTaskSearch" (click)='addParentTaskData(parentTask)'  [ngClass]="{'rowClass': parentTask.id===parentTaskId}">
+                                <tr *ngFor="let parentTask of parentTaskData | parentTaskFilter:parentTaskSearchVal" (click)='addParentTaskData(parentTask)'  [ngClass]="{'rowClass': parentTask.id===parentTaskId}">
                                         <td style="width:100%">
                                                 <input type="text" [(ngModel)]="parentTask.parentTaskDesc" name="parentTaskDesc" class="inputBoxSetting3" disabled />
                                         </td>

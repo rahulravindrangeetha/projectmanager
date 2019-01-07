@@ -4,24 +4,24 @@
         <table style="width:100%">
                 <tr>
                         <td style="width:50%">
-                                <table style="width:50%">
+                                <table style="width:60%">
                                 <tr>
-                                        <td style="width:30%">
-                                                Project:
+                                        <td style="width:20%">
+                                                <h3>Project:</h3>
                                         </td>
-                                        <td style="width:90%">
-                                                <input type="text" [(ngModel)]="projectDesc" name="projectDesc" class="inputBoxSetting3" readonly required style="width:80%"/>
+                                        <td style="width:80%">
+                                                <h3><input type="text" [(ngModel)]="projectDesc" name="projectDesc" class="inputBoxSetting3" readonly required style="width:70%"/>
                                                 &nbsp;
-                                                        <button type="button" (click)="addProject()" class="btn btn-primary btn-sm black-background white" data-toggle="modal" data-target="#myProjectModal">Search</button>
+                                                        <button type="button" (click)="addProject()" class="btn btn-primary btn-lg black-background white" data-toggle="modal" data-target="#myProjectModal">Search</button></h3>
                                         </td>
                                 </tr>
                                 
                                 </table>
                         </td>
-                        <td [hidden]="taskData===null" style="width:40%">
-                                        Sort : <button name="startDate" (click)='setOrder($event)' style="width:15%" class="btn btn-primary btn-xs black-background white" >Start Date</button>
-                                        <button name="endDate" (click)='setOrder($event)' style="width:15%" class="btn btn-primary btn-xs black-background white" >End Date</button>
-                                        <button name="priority" (click)='setOrder($event)' style="width:15%" class="btn btn-primary btn-xs black-background white" >Priority</button>
+                        <td [hidden]="taskData===null" style="width:50%">
+                                       <h3> Sort : <button name="startDate" (click)='setOrder($event)' style="width:25%" class="btn btn-primary btn-lg black-background white" >Start Date</button>
+                                        <button name="endDate" (click)='setOrder($event)' style="width:25%" class="btn btn-primary btn-lg black-background white" >End Date</button>
+                                        <button name="priority" (click)='setOrder($event)' style="width:20%" class="btn btn-primary btn-lg black-background white" >Priority</button></h3>
                                         
                         </td>
                 </tr>
@@ -34,22 +34,22 @@
         <table style="width:100%">
                 <tr>
                         <th style="width:20%">
-                                Task
+                                <h4><strong>Task</strong></h4>
                         </th>
                         <th style="width:20%">
-                                Parent
+                                <h4><strong>Parent</strong></h4>
                         </th>
                         <th>
-                                Priority
+                                <h4><strong>Priority</strong></h4>
                         </th>
                         <th>
-                                Start
+                                <h4><strong>Start</strong></h4>
                         </th>
                         <th>
-                                End
+                                <h4><strong>End</strong></h4>
                         </th>
                         <th>
-                                Status
+                                <h4><strong>Status</strong></h4>
                         </th>
                         <th>
                                 &nbsp;
@@ -61,31 +61,31 @@
                 <tr>
                         <td style="width:20%">
                                 <div style="width:15%;border:2px thin">
-                                                {{task.task}}
+                                                <h4>{{task.task}}</h4>
                                         </div>
                         </td>
                         <td style="width:20%">
 
-                                        {{task.parentTask.parentTaskDesc}}
+                                        <h4>{{task.parentTask.parentTaskDesc}}</h4>
                                         
                         </td>
                         <td>
-                                        {{task.priority}}
+                                        <h4>{{task.priority}}</h4>
                         </td>
                         <td>
-                                        {{task.startDate}}
+                                        <h4>{{task.startDate}}</h4>
                         </td>
                         <td>
-                                        {{task.endDate}}
+                                        <h4>{{task.endDate}}</h4>
                         </td>
                         <td>
-                                        {{task.status}}
+                                        <h4>{{task.status}}</h4>
                         </td>
                         <td>
-                                        <button name="editTask" (click)='editTask(task.taskId)' style="width:60%" class="btn btn-primary btn-xs black-background white" [disabled]="task.status==='Suspended' || task.status==='Completed'">Edit</button>
+                                        <button name="editTask" (click)='editTask(task.taskId)' style="width:60%" class="btn btn-primary btn-sm black-background white" [disabled]="task.status==='Suspended' || task.status==='Completed'">Edit</button>
                         </td>
                         <td>
-                                        <button name="endTask" (click)='endTask(task.taskId)' style="width:60%" class="btn btn-primary btn-xs black-background white" [disabled]="task.status==='Suspended' || task.status==='Completed'">End Task</button>
+                                        <button name="endTask" (click)='endTask(task.taskId)' style="width:60%" class="btn btn-primary btn-sm black-background white" [disabled]="task.status==='Suspended' || task.status==='Completed'">End Task</button>
                         </td>
                 </tr>
                                    
@@ -115,7 +115,7 @@
                                         <th style="width:28%">End Date</th>
                                         <th style="width:10%">Priority</th>
                                 </tr>                            
-                                <tr *ngFor="let project of data | projectFilter:projectSearch" (click)='addProjectData(project)'  [ngClass]="{'rowClass': project.projectId===projectId}">
+                                <tr *ngFor="let project of data | projectFilter:projectSearch | noTaskFilter" (click)='addProjectData(project)'  [ngClass]="{'rowClass': project.projectId===projectId}">
                                         <td style="width:34%">
                                                 <input type="text" [(ngModel)]="project.project" name="project" class="inputBoxSetting3" disabled />
                                         </td>

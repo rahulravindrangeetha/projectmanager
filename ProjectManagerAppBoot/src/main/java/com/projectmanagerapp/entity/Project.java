@@ -189,10 +189,13 @@ public class Project implements Serializable
 		this.projectManager = projectManager;
 	}
 	
-	public Project(int projectId,String project)
+	public Project(int projectId,String project,LocalDate startDate,LocalDate endDate,int priority)
 	{
 		this.projectId=projectId;
 		this.project=project;
+		this.startDate=startDate;
+		this.endDate=endDate;
+		this.priority=priority;
 	}
 
 	public Project()

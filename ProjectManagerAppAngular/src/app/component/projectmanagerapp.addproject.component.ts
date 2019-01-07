@@ -37,6 +37,7 @@ export class AddProjectComponent
   managerNameTemp:string;
   priority:number= 0;
   bsConfig: Partial<BsDatepickerConfig>;
+  searchProjectVal:string='';
   options: Options = {
     floor: 0,
     ceil: 30,
@@ -352,7 +353,18 @@ else
 
 suspendProject(projectId:number)
 {
-  this.projectService.suspendProject(projectId).subscribe();
+  this.projectService.suspendProject(projectId).subscribe(
+    resp=>{
+      this.projectId=null;
+      this.visible=false;
+      this.resetForm();
+      this.ngOnInit();
+      
+    },
+    error=>
+    {console.log(error,"error")
+  }
+  );
 
 }
 }

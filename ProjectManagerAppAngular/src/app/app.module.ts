@@ -16,6 +16,7 @@ import { TimepickerModule } from 'ngx-bootstrap';
 import { UserfilterPipe } from './userfilter.pipe';
 import { ProjectfilterPipe } from './projectfilter.pipe';
 import { ParentTaskfilterPipe } from './parenttaskfilter.pipe';
+import { NoTaskfilterPipe } from './notaskfilter.pipe';
 import { DatePipe } from '@angular/common';
 import { OrderModule } from 'ngx-order-pipe';
 import { Ng5SliderModule } from 'ng5-slider';
@@ -32,7 +33,8 @@ import { Ng5SliderModule } from 'ng5-slider';
     AddTaskComponent,
     ParentTaskfilterPipe,
     ViewTaskComponent,
-    EditTaskComponent
+    EditTaskComponent,
+    NoTaskfilterPipe
   ],
   imports: [
     BrowserModule,
