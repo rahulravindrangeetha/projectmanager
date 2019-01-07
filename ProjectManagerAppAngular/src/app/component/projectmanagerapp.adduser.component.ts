@@ -64,6 +64,7 @@ export class AddUserComponent
       this.lastName=userToBeEdited.lastName;
       this.employeeId=userToBeEdited.employeeId;
       this.userId=userToBeEdited.userId;
+      window.scroll(0,0);
 
     }
 

@@ -246,6 +246,7 @@ editProject(editProject:Project)
     this.checkBoxVal=false;
 
   }
+  window.scroll(0,0);
 }
 
 updateProject()
