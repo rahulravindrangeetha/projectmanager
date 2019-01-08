@@ -25,5 +25,5 @@ public interface ProjectRepo extends JpaRepository<Project, Integer>
 	
 	@Query("select new Project(p.projectId,p.project,p.startDate,p.endDate,p.priority) from Project p where p.projectId not in (select distinct p.projectId from Project p join p.tasks as T with T.status='Suspended')")
 	List<Project> getAllNonSuspendedProject();
-
+	
 }

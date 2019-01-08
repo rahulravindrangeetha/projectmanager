@@ -16,6 +16,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -32,10 +36,12 @@ public class Project implements Serializable
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="project",fetch=FetchType.LAZY)
+	@Fetch(FetchMode.SUBSELECT)
 	private List<Task> tasks;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="project",fetch=FetchType.LAZY)
+	@Fetch(FetchMode.SUBSELECT)
 	private List<ParentTask> parentTasks;
 	
 	@Column(name="PROJECT")
@@ -56,6 +62,7 @@ public class Project implements Serializable
 	
 	@ManyToOne
 	@JoinColumn(name="USER_ID")
+	@Fetch(FetchMode.JOIN)
 	private Users projectManager;
 	
 	@Transient
