@@ -14,5 +14,7 @@ public interface ParentTaskService
 	public void createParentTask(ParentTask parentTask);
 	
 	public List<ParentTask> getAllParentTask(int projectId);
+	
+	public void updateParentTask(ParentTask parentTask) ;
 
 }

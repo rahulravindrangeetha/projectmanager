@@ -50,5 +50,12 @@ public class ParentTaskController
 		parentTaskService.createParentTask(newParentTask);
 		return new ResponseEntity(HttpStatus.CREATED);
 	}
+	
+	@RequestMapping(method=RequestMethod.PUT)
+	public ResponseEntity updateParentTask(@RequestBody ParentTask updateParentTask) 
+	{
+		parentTaskService.updateParentTask(updateParentTask);
+		return new ResponseEntity(HttpStatus.CREATED);
+	}
 
 }

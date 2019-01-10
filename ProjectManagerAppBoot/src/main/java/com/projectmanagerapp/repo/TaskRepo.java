@@ -20,4 +20,9 @@ public interface TaskRepo extends JpaRepository<Task, Integer>
 	@Query("from Task t where t.project.projectId=?1")
 	List<Task> getAllTasks(int projectId);
 
+	@Transactional
+	@Modifying(clearAutomatically=true)
+	@Query("Update Task t set t.status='Completed' where t.parentTask.id=?1")
+	void endParentTask(int id);
+
 }

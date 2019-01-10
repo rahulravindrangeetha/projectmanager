@@ -27,5 +27,9 @@ export class ParentTaskService
         return this.http.get("http://localhost:8181/ProjectManagerApp/parenttasks/"+projectId); 
     }
 
-
+    updateParentTask(updateParentTask:ParentTask) : Observable<any>
+    {
+        return this.http.put("http://localhost:8181/ProjectManagerApp/parenttasks",updateParentTask);
+        
+    }
 }

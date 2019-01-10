@@ -66,9 +66,15 @@ public class TaskServiceImpl implements TaskService
 	@CacheEvict(value = { "tasks", "projects" }, allEntries = true)
 	public void endTask(Task endTask)
 	{
-		endTask.setStatus("Completed");
-		taskRepo.save(endTask);
-		
+		if(endTask.getIsParentTask()==0)
+		{
+			endTask.setStatus("Completed");
+			taskRepo.save(endTask);		
+		}
+		else
+		{
+			taskRepo.endParentTask(endTask.getParentTask().getId());
+		}
 	}
 
 	@Override
@@ -80,6 +86,13 @@ public class TaskServiceImpl implements TaskService
 		for(Task task:noParentTask)
 		{
 			task.setParentTask(new ParentTask("This Task has no Parent"));
+		}
+		for(Task task:withParentTask)
+		{
+			if(task.getIsParentTask()==1)
+			{
+				task.setParentTask(new ParentTask("This is a Parent Task"));
+			}		
 		}
 		tasks.clear();
 		tasks.addAll(noParentTask);

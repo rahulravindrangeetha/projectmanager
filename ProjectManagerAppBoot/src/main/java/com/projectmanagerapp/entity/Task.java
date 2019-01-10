@@ -57,6 +57,17 @@ public class Task implements Serializable
 	@Column(name="STATUS")
 	private String status;
 	
+	@Column(name="IS_PARENT_TASK")
+	private int isParentTask;
+	
+	public int getIsParentTask() {
+		return isParentTask;
+	}
+
+	public void setIsParentTask(int isParentTask) {
+		this.isParentTask = isParentTask;
+	}
+
 	@ManyToOne
 	@JoinColumn(name="USER_ID")
 	private Users taskManager;
